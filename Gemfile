@@ -7,6 +7,11 @@ group :development, :test do
     gem 'rspec-rails'
 end
 
+## TODO Figure out what this is aactually called
+group :production do
+    gem 'mysql2'
+end
+
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
