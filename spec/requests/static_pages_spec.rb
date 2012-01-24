@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Static Pages" do
 
-  let(:base_title) { "Sample App" }
+  let(:base_title) { "CCMV Sermon Archive" }
 
   describe "Home Page" do
     it "should have the content 'Sample App'" do

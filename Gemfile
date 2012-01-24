@@ -5,6 +5,7 @@ gem 'rails', '3.2.0'
 group :development, :test do
     gem 'sqlite3'
     gem 'rspec-rails'
+    gem 'guard-rspec'
 end
 
 ## TODO Figure out what this is aactually called
@@ -29,9 +30,15 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'compass'
 
 group :test do
     gem 'capybara'
+    gem 'turn'
+    gem 'rb-fsevent', :require => false
+    gem 'growl'
+    gem 'guard-spork'
+    gem 'spork'
 end
 
 # To use ActiveModel has_secure_password
