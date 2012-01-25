@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125035054) do
+ActiveRecord::Schema.define(:version => 20120125040415) do
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -25,5 +25,34 @@ ActiveRecord::Schema.define(:version => 20120125035054) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
+
+  create_table "sermons", :force => true do |t|
+    t.string   "title"
+    t.date     "date"
+    t.string   "passage"
+    t.string   "summary"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "sermons_tags", :force => true do |t|
+    t.integer "sermon_id"
+    t.integer "tag_id"
+  end
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "username"
+    t.string   "password_digest"
+    t.integer  "role_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "users", ["role_id"], :name => "index_users_on_role_id"
 
 end
