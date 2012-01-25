@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125040415) do
+ActiveRecord::Schema.define(:version => 20120125041601) do
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20120125040415) do
     t.string   "summary"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "audio_path"
   end
 
   create_table "sermons_tags", :force => true do |t|
