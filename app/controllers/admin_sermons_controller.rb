@@ -1,0 +1,2 @@
+class AdminSermonsController < ApplicationController
+end

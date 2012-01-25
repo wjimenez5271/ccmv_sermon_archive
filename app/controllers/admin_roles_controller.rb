@@ -1,0 +1,2 @@
+class AdminRolesController < ApplicationController
+end
