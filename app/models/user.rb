@@ -13,4 +13,5 @@
 
 class User < ActiveRecord::Base
   belongs_to :role
+  attr_accessible :email, :username
 end

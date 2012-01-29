@@ -12,7 +12,6 @@ group :development do
   gem 'annotate', '~> 2.4.1.beta'
 end
 
-## TODO Figure out what this is actually called
 group :production do
     gem 'mysql2'
 end
@@ -40,6 +39,7 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'will_paginate'
 
 group :test do
     gem 'capybara'
