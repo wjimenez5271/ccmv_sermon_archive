@@ -11,19 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120126053006) do
+ActiveRecord::Schema.define(:version => 20120129231038) do
 
   create_table "roles", :force => true do |t|
     t.string   "name"
-    t.boolean  "superuser"
-    t.boolean  "manage_roles"
-    t.boolean  "add_sermons"
-    t.boolean  "edit_sermons"
-    t.boolean  "delete_sermons"
-    t.boolean  "add_edit_users"
-    t.boolean  "delete_users"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.boolean  "superuser",      :default => false
+    t.boolean  "manage_roles",   :default => false
+    t.boolean  "add_sermons",    :default => false
+    t.boolean  "edit_sermons",   :default => false
+    t.boolean  "delete_sermons", :default => false
+    t.boolean  "add_edit_users", :default => false
+    t.boolean  "delete_users",   :default => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
   end
 
   create_table "sermons", :force => true do |t|
