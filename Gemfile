@@ -8,7 +8,11 @@ group :development, :test do
     gem 'guard-rspec'
 end
 
-## TODO Figure out what this is aactually called
+group :development do
+  gem 'annotate', '~> 2.4.1.beta'
+end
+
+## TODO Figure out what this is actually called
 group :production do
     gem 'mysql2'
 end
