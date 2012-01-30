@@ -17,7 +17,8 @@ require 'spec_helper'
 
 describe Sermon do
   before do
-    @sermon = Sermon.new( date: '12/11/2011', title: 'A Sermon' )
+    @sermon = Sermon.new( date: '12/11/2011', title: 'A Sermon',
+                          audio_path: 'abc.mp3' )
   end
   subject { @sermon }
 
@@ -25,6 +26,16 @@ describe Sermon do
 
   describe 'when date is not present' do
     before { @sermon.date = nil }
+    it { should_not be_valid }
+  end
+
+  describe 'when audio_path is not present' do
+    before { @sermon.audio_path = nil }
+    it { should_not be_valid }
+  end
+
+  describe 'when speaker_id is not present' do
+    before { @sermon.speaker_id = nil }
     it { should_not be_valid }
   end
 end

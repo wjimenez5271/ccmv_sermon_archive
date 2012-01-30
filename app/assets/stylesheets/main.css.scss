@@ -1,14 +1,12 @@
-@import "base";
-
-#content {
-  +colborder;
-  +column(22);
-  +last;
-}
-
-#sermon_list {
-  +column(22);
-  +last;
-  .sermon_passage { +last; }
+@import "compass/utilities/general/float";
+// Styles for pagination
+.paginate_block {
+  .pagination {
+    @include float-left;
+  }
+  .paginate_info {
+    @include float-right;
+  }
+  clear:both;
 }
 

@@ -1,13 +1,11 @@
 CcmvSermonArchive::Application.routes.draw do
 
-  get "main/index"
-
-  root to: 'main#sermon_list'
+  # Root Page
+  match '/(:page)' => 'main#index', as: :root, defaults: { page: 1 }
 
   namespace :admin do
     match '/' => 'main#index'
-    resources :roles, :users, :except => [:show]
-    resources :sermons, :as => 'admin_sermons', :except => [:show]
+    resources :sermons, :roles, :users, :except => [:show]
   end
 
   # The priority is based upon order of creation:

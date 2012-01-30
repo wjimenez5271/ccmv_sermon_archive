@@ -18,4 +18,6 @@ class Sermon < ActiveRecord::Base
   belongs_to :speaker
 
   validates :date, presence: true
+  validates :audio_path, presence: true
+  validates :speaker_id, presence: true
 end

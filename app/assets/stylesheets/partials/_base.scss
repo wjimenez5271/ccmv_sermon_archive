@@ -1,6 +1,9 @@
 // Here is where you can define your constants for your application and to configure the blueprint framework.
 // Feel free to delete these if you want keep the defaults:
 
+@import "blueprint/grid";
+@import "compass/utilities/general/float";
+
 $blueprint-grid-columns: 24;
 $blueprint-container-size: 950px;
 $blueprint-grid-margin: 10px;
@@ -10,12 +13,19 @@ $blueprint-grid-margin: 10px;
 $blueprint-grid-width: ($blueprint-container-size + $blueprint-grid-margin) / $blueprint-grid-columns - $blueprint-grid-margin;
 
 #sermon_list {
-  .sermon_date { +column(2); }
-  .sermon_title { +column(12); }
-  .sermon_passage{ +column(4); }
-  .sermon_speaker { +column(4); }
+  .sermon_row { 
+    @include column($blueprint-grid-columns);
+    clear: both;
+
+    .sermon_date { @include column(2); }
+    .sermon_title { @include column(12); }
+    .sermon_passage{ @include column(4); }
+    .sermon_speaker { @include column(4); }
+  }
+
+  clear: both;
 }
 
-#container { +container; }
+#container { @include container; }
 
-#header, #footer { +column($blueprint-grid-columns); }
+#header, #footer { @include column($blueprint-grid-columns); }

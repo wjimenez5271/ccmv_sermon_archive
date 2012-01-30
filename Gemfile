@@ -10,6 +10,7 @@ end
 
 group :development do
   gem 'annotate', '~> 2.4.1.beta'
+  gem 'faker'
 end
 
 group :production do
@@ -31,7 +32,8 @@ group :assets do
   # gem 'therubyracer'
 
   gem 'uglifier', '>= 1.0.3'
-  gem 'compass', '>= 0.11.7'
+  gem 'compass', '>= 0.12.alpha.4'
+  #gem 'compass', '>= 0.11.7'
   # Temporary until asset finding bug is fixed, then go back to the above line
   #gem 'compass', :git => 'git://github.com/chriseppstein/compass.git', :branch => 'no_rails_integration'
   #gem 'compass-rails', :git => 'git://github.com/Compass/compass-rails.git'
