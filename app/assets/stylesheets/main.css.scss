@@ -1,24 +1,41 @@
 @import "partials/base";
 
-$sermon-content-columns: 23;
+#main {
 
 #content {
-  $sermon-content-push: ($blueprint-grid-columns - $sermon-content-columns) / 2;
-  @include push($sermon-content-push);
-  @include column($sermon-content-columns);
-  @include last;
+  background: #7090af;
+  @include border-radius( 15px );
+  @include padding;
 }
 
 #sermon_list {
-  .sermon_row {
-    @include column($sermon-content-columns);
+  $sermon-list-columns: 21;
+  $sermon-list-push: ($blueprint-grid-columns - $sermon-list-columns - 2) / 2;
+  @include push($sermon-list-push);
+  @include column($sermon-list-columns);
+  @include last;
 
+  background: #e0e0e0;
+  @include border-radius( 20px );
+  @include padding;
+  margin-bottom: 0px;
+
+
+  .sermon_row {
+    @include column($sermon-list-columns);
+
+    .sermon_date { @include column(2); }
+    .sermon_title { @include column(12); }
+    .sermon_passage{ @include column(4); }
     .sermon_speaker { @include column(4, true); }
   }
+  clear: both;
+  @include clearfix;
 }
 
 // Styles for pagination
 .paginate_block {
+  @include padding($half-column, 0);
   .pagination {
     @include float-left;
   }
@@ -26,5 +43,7 @@ $sermon-content-columns: 23;
     @include float-right;
   }
   clear:both;
+  @include clearfix;
 }
 
+}

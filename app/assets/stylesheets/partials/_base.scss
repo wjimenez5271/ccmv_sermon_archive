@@ -14,25 +14,15 @@ $blueprint-grid-margin: 10px;
 // Or you can set $blueprint-grid-width to a fixed value and unset $blueprint-container-size -- it will be calculated for you.
 $blueprint-grid-width: ($blueprint-container-size + $blueprint-grid-margin) / $blueprint-grid-columns - $blueprint-grid-margin;
 
-#sermon_list {
-  background: #e0e0e0;
+$half-column: ($blueprint-grid-width + $blueprint-grid-margin) / 2;
+
+@mixin padding($horizontal: $half-column, $vertical: $half-column/2) {
   padding: {
-    left: 2em;
-    right: 2em;
-    top: 1em;
-    bottom: 1em;
+    left: $horizontal;
+    right: $horizontal;
+    top: $vertical;
+    bottom: $vertical;
   }
-  @include border-radius( 20px );
-
-  .sermon_row { 
-    .sermon_date { @include column(2); }
-    .sermon_title { @include column(12); }
-    .sermon_passage{ @include column(4); }
-    .sermon_speaker { @include column(4); }
-  }
-
-  clear: both;
-  @include clearfix;
 }
 
 #container { @include container; }
