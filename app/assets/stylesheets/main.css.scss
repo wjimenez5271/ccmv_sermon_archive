@@ -1,9 +1,9 @@
 @import "partials/base";
 
-$sermon-content-columns: 24;
+$sermon-content-columns: 23;
 
 #content {
-  $sermon-content-push: floor(($blueprint-grid-columns - $sermon-content-columns) / 2);
+  $sermon-content-push: ($blueprint-grid-columns - $sermon-content-columns) / 2;
   @include push($sermon-content-push);
   @include column($sermon-content-columns);
   @include last;
@@ -12,6 +12,8 @@ $sermon-content-columns: 24;
 #sermon_list {
   .sermon_row {
     @include column($sermon-content-columns);
+
+    .sermon_speaker { @include column(4, true); }
   }
 }
 
