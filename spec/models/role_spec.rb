@@ -18,5 +18,18 @@
 require 'spec_helper'
 
 describe Role do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    @role = Role.new( name: "User" )
+  end
+  subject { @role }
+
+  it { should respond_to(:name) }
+  it { should respond_to(:superuser) }
+
+  it { should be_valid }
+
+  describe "name is not present" do
+    before { @role.name = " " }
+    it { should_not be_valid }
+  end
 end

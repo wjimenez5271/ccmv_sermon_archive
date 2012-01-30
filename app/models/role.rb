@@ -16,4 +16,6 @@
 #
 
 class Role < ActiveRecord::Base
+  attr_protected :superuser
+  validates :name, presence: true
 end

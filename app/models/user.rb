@@ -14,4 +14,9 @@
 class User < ActiveRecord::Base
   belongs_to :role
   attr_accessible :email, :username
+  attr_accessible :email, :username, :role_id, as: :admin
+
+  validates :email, presence: true
+  validates :username, presence: true
+  validates :role_id, presence: true
 end

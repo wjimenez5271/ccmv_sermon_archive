@@ -16,5 +16,15 @@
 require 'spec_helper'
 
 describe Sermon do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before do
+    @sermon = Sermon.new( date: '12/11/2011', title: 'A Sermon' )
+  end
+  subject { @sermon }
+
+  it { should be_valid }
+
+  describe 'when date is not present' do
+    before { @sermon.date = nil }
+    it { should_not be_valid }
+  end
 end
