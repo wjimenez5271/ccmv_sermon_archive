@@ -35,8 +35,8 @@ module Admin::SermonsHelper
       match = f.to_s.match(regex)
       if match
         scanned += 1
-        Rails.logger.info match
         service, speaker_initials, year, month, day = match[1..5]
+        service = service.titleize
        
         speaker_name = speakers[speaker_initials]
         if not speaker_name

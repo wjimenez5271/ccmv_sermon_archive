@@ -1,4 +1,5 @@
 <div class="sermon_row">
-  <div class="sermon_date"><a href="<%= sermon.audio_path %>"><%= sermon.date %></a></div>
+  <div class="sermon_date"><a href="/media/<%= sermon.audio_path %>"><%= sermon.date %></a></div>
+  <div class="sermon_service"><%= sermon.service.name %></div>
   <div class="sermon_speaker"><%= sermon.speaker.name %></div>
 </div>

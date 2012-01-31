@@ -25,9 +25,11 @@
     @include column($sermon-list-columns);
 
     .sermon_date { @include column(2); }
-    .sermon_title { @include column(12); }
-    .sermon_passage{ @include column(4); }
+    .sermon_service { @include column(2); }
     .sermon_speaker { @include column(4, true); }
+    // These are unused for now.
+    .sermon_title { @include column(10); }
+    .sermon_passage{ @include column(4); }
   }
   clear: both;
   @include clearfix;
