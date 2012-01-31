@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120129231038) do
+ActiveRecord::Schema.define(:version => 20120131072934) do
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20120129231038) do
     t.datetime "updated_at", :null => false
     t.string   "audio_path"
     t.integer  "speaker_id"
+    t.integer  "service_id"
   end
 
   add_index "sermons", ["date"], :name => "index_sermons_on_date"
@@ -46,6 +47,12 @@ ActiveRecord::Schema.define(:version => 20120129231038) do
 
   add_index "sermons_tags", ["sermon_id"], :name => "index_sermons_tags_on_sermon_id"
   add_index "sermons_tags", ["tag_id"], :name => "index_sermons_tags_on_tag_id"
+
+  create_table "services", :force => true do |t|
+    t.string "name"
+  end
+
+  add_index "services", ["name"], :name => "index_services_on_name"
 
   create_table "speakers", :force => true do |t|
     t.string "name"

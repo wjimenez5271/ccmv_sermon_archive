@@ -11,6 +11,7 @@
 #  updated_at :datetime        not null
 #  audio_path :string(255)
 #  speaker_id :integer
+#  service_id :integer
 #
 
 require 'spec_helper'

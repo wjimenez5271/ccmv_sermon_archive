@@ -11,11 +11,13 @@
 #  updated_at :datetime        not null
 #  audio_path :string(255)
 #  speaker_id :integer
+#  service_id :integer
 #
 
 class Sermon < ActiveRecord::Base
   has_and_belongs_to_many :tags
   belongs_to :speaker
+  belongs_to :service
 
   validates :date, presence: true
   validates :audio_path, presence: true
