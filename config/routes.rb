@@ -6,6 +6,7 @@ CcmvSermonArchive::Application.routes.draw do
   namespace :admin do
     match '/' => 'main#index'
     resources :sermons, :roles, :users, :except => [:show]
+    get 'sermons/rescan_files'
   end
 
   # The priority is based upon order of creation:
