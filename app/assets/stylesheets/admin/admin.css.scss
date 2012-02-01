@@ -4,20 +4,32 @@
 
 background: #7090af;
 
+
 $menubar-columns: 2;
 #menubar {
+  @include prepend-top($half-column/2);
   @include column($menubar-columns);
+
+  ul {
+    @include no-bullets;
+
+    li {
+      // Menu stuff here...
+      font-weight: bold;
+    }
+  }
 }
 
-//$content-push: ($menubar-columns) / 2;
-$content-push: 0;
-$content-columns: $blueprint-grid-columns - $menubar-columns;
+$content-columns: $blueprint-grid-columns - $menubar-columns - 1;
 #content {
   background: #e0e0e0;
-  @include border-radius( 20px );
-  //@include padding($half-column, 0);
+  @include border-radius-with-padding(20px);
   @include column($content-columns, true);
-  //padding-left: 5px;
 }
 
+#header, #footer {
+  @include push($menubar-columns);
+  margin-bottom: 0;
+  @include column($content-columns, true);
+}
 }

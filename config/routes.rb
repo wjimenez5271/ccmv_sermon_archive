@@ -1,11 +1,11 @@
 CcmvSermonArchive::Application.routes.draw do
-
   # Root Page
   match '/(:page)' => 'main#index', as: :root, defaults: { page: 1 }
 
   namespace :admin do
     match '/' => 'main#index'
-    resources :sermons, :roles, :users, :except => [:show]
+    resources :sermons, :speakers, :services, :roles, :users,
+      :except => [:show]
     get 'sermons/rescan_files'
   end
 

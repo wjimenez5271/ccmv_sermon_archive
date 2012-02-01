@@ -1,13 +1,15 @@
 // Here is where you can define your constants for your application and to configure the blueprint framework.
 // Feel free to delete these if you want keep the defaults:
 
+$blueprint-container-size: 960px;
 @import "blueprint/colors";
 @import "blueprint/grid";
 @import "compass/utilities/general/float";
 @import "compass/css3/border-radius";
+@import "compass/typography";
 
-$blueprint-grid-columns: 24;
 $blueprint-container-size: 950px;
+$blueprint-grid-columns: 24;
 $blueprint-grid-margin: 10px;
 
 // Use this to calculate the width based on the total width.
@@ -16,15 +18,38 @@ $blueprint-grid-width: ($blueprint-container-size + $blueprint-grid-margin) / $b
 
 $half-column: ($blueprint-grid-width + $blueprint-grid-margin) / 2;
 
-@mixin padding($horizontal: $half-column, $vertical: $half-column/2) {
+@mixin padding($horizontal: $half-column, $top: $half-column/2, 
+               $bottom: $half-column/2 ) {
   padding: {
     left: $horizontal;
     right: $horizontal;
-    top: $vertical;
-    bottom: $vertical;
+    top: $top;
+    bottom: $bottom;
   }
 }
 
+@mixin border-radius-with-padding($radius: 20px)  {
+  @include border-radius($radius);
+  @include padding($radius * 0.9, $radius * 0.45, $radius * 0.45);
+}
+
+// Add padding to look good with the border radius, and remove the
+// same amount from the width of the element so that things don't get
+// messed up.
+@mixin column-with-border-radius-padding($columns, $radius, $last: false) {
+  @include column($columns - ( $radius * 1.8 / ( $blueprint-grid-outer-width ) ),
+                  $last);
+  @include border-radius-with-padding($radius);
+}
+
+// Styles common to both main and admin sections. This shouldn't contain
+// anything related to layout.
+body.bp {
+
 #container { @include container; }
 
-#header, #footer { @include column($blueprint-grid-columns); }
+a {
+  @include hover-link;
+}
+
+}

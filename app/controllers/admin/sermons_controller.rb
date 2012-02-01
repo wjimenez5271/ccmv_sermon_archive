@@ -80,7 +80,7 @@ class Admin::SermonsController < ApplicationController
         @output << "No regex match on #{f.to_s}\n"
       end
     end
-    @output << "Scanned #{scanned} files, added #{added}\n"
+    @output << "Scanned #{scanned} files, added #{added}"
 
     @output
   end

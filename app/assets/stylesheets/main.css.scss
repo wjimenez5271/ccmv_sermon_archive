@@ -1,51 +1,62 @@
 @import "partials/base";
 
-#main {
+#main_body {
+
+#header, #footer { @include column($blueprint-grid-columns); }
 
 #content {
   background: #7090af;
-  @include border-radius( 15px );
-  @include padding;
+  @include border-radius(15px);
+  @include column($blueprint-grid-columns, true);
 }
 
-#sermon_list {
-  $sermon-list-columns: 21;
-  $sermon-list-push: ($blueprint-grid-columns - $sermon-list-columns - 2) / 2;
+#header {
+  $header-push: 1;
+  @include push($header-push);
+  @include column($blueprint-grid-columns - $header-push, true);
+  @include prepend-top(10px);
+  margin-bottom:0;
+}
+
+$sermon-list-push: 1;
+$sermon-list-columns: $blueprint-grid-columns - ( $sermon-list-push * 2 );
+
+#sermons_area {
   @include push($sermon-list-push);
-  @include column($sermon-list-columns);
-  @include last;
-
-  background: #e0e0e0;
-  @include border-radius( 20px );
-  @include padding;
-  margin-bottom: 0px;
-
-
-  .sermon_row {
-    @include column($sermon-list-columns);
-
-    .sermon_date { @include column(2); }
-    .sermon_service { @include column(2); }
-    .sermon_speaker { @include column(4, true); }
-    // These are unused for now.
-    .sermon_title { @include column(10); }
-    .sermon_passage{ @include column(4); }
-  }
-  clear: both;
+  @include column($sermon-list-columns, true);
+  @include append($blueprint-grid-columns - $sermon-list-columns - $sermon-list-push);
   @include clearfix;
-}
 
-// Styles for pagination
-.paginate_block {
-  @include padding($half-column, 0);
-  .pagination {
-    @include float-left;
+  #sermon_list {
+    @include column-with-border-radius-padding($sermon-list-columns, 20px);
+    @include last;
+
+    background: #e0e0e0;
+    margin-bottom: 0px;
+    margin-right: 0px;
+
+    .sermon_row {
+      @include column($sermon-list-columns);
+
+      .sermon_date { @include column(2); }
+      .sermon_service { @include column(2); }
+      .sermon_speaker { @include column(4, true); }
+      // These are unused for now.
+      .sermon_title { @include column(10); }
+      .sermon_passage{ @include column(4); }
+    }
   }
-  .paginate_info {
-    @include float-right;
+
+  // Styles for pagination
+  .paginate_block {
+    .pagination {
+      @include float-left;
+    }
+    .paginate_info {
+      @include float-right;
+    }
+    @include last;
   }
-  clear:both;
-  @include clearfix;
 }
 
 }

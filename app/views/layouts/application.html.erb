@@ -6,14 +6,18 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body class="bp" id="main">
+<body class="bp" id="main_body">
   <div class='container' id='container'>
 
-    <%= render 'layouts/main_header' %>
     <div id='content'>
+      <div id='header'>
+        <%= render 'layouts/main_header' %>
+      </div>
       <%= yield %>
+      <div id='footer'>
+        <%= render 'layouts/main_footer' %>
+      </div>
     </div>
-    <%= render 'layouts/main_footer' %>
 
   </div>
   <%= debug(params) if Rails.env.development? %>

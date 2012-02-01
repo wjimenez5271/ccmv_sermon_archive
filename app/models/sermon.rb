@@ -21,6 +21,7 @@ class Sermon < ActiveRecord::Base
 
   validates :date, presence: true
   validates :audio_path, presence: true
-  validates :speaker_id, presence: true
-  validates :service_id, presence: true
+
+  delegate :name, to: :speaker, prefix: true, allow_nil: true
+  delegate :name, to: :service, prefix: true, allow_nil: true
 end
