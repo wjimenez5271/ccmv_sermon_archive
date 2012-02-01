@@ -17,13 +17,18 @@ namespace :db do
       speakers << Speaker.create!(name: name)
     end
 
+    services = []
+    services << Service.create!(name: "Thursday")
+    services << Service.create!(name: "Sunday")
+
     100.times do |n|
       month = n/30 + 1
       day = n % 30 + 1
       date = Time.utc( 2012, month, day )
       Sermon.create!(date: date,
                      audio_path: "file#{n}.mp3",
-                     speaker: speakers[ n % speakers.length ] )
+                     speaker: speakers[ n % speakers.length ],
+                     service: services[ n % services.length ])
 
     end
   end
