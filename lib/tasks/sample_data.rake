@@ -1,6 +1,6 @@
 namespace :db do
   desc "Fill database with sample data"
-  task :populate => :environment do
+  task :sample_data => :environment do
     Rake::Task['db:reset'].invoke
     
     speaker_names = [ "Rick Franks",

@@ -1,6 +1,7 @@
 require 'find'
 
 class Admin::SermonsController < ApplicationController
+  layout 'admin'
   def index
   end
 
