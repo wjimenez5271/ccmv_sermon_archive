@@ -6,9 +6,16 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body class="bp">
+<body class="bp" id="admin_body">
 
-<%= yield %>
-
+  <div class='container' id='container'>
+    <%= render 'layouts/admin_header' %>
+    <%= render 'layouts/admin_leftbar' %>
+    <div id='content'>
+      <%= yield %>
+    </div>
+    <%= render 'layouts/admin_footer' %>
+  </div>
+  <%= debug(params) if Rails.env.development? %>
 </body>
 </html>

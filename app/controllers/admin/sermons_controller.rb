@@ -77,7 +77,7 @@ class Admin::SermonsController < ApplicationController
           added += 1
         end
       else
-        @output << "No regex match on #{short_name}\n"
+        @output << "No regex match on #{f.to_s}\n"
       end
     end
     @output << "Scanned #{scanned} files, added #{added}\n"
