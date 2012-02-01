@@ -6,12 +6,12 @@ background: #7090af;
 
 $menubar-columns: 2;
 #menubar {
-  @include column($leftbar-columns);
+  @include column($menubar-columns);
 }
 
-//$content-push: ($leftbar-columns) / 2;
+//$content-push: ($menubar-columns) / 2;
 $content-push: 0;
-$content-columns: $blueprint-grid-columns - $leftbar-columns;
+$content-columns: $blueprint-grid-columns - $menubar-columns;
 #content {
   background: #e0e0e0;
   @include border-radius( 20px );
