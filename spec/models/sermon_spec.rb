@@ -17,26 +17,18 @@
 require 'spec_helper'
 
 describe Sermon do
-  before do
-    @sermon = Sermon.new( date: '12/11/2011', title: 'A Sermon',
-                          audio_path: 'abc.mp3' )
-  end
-  subject { @sermon }
+  subject { Sermon.new( date: '12/11/2011', title: 'A Sermon',
+                        audio_path: 'abc.mp3' ) }
 
   it { should be_valid }
 
-  describe 'when date is not present' do
-    before { @sermon.date = nil }
-    it { should_not be_valid }
-  end
+  it { should validate_presence_of :date }
+  it { should validate_presence_of :audio_path }
 
-  describe 'when audio_path is not present' do
-    before { @sermon.audio_path = nil }
-    it { should_not be_valid }
-  end
+  it { should respond_to :speaker_name }
+  it { should handle_name_for_nil_reference :speaker }
+  it { should respond_to :service_name }
+  it { should handle_name_for_nil_reference :service }
 
-  describe 'when speaker_id is not present' do
-    before { @sermon.speaker_id = nil }
-    it { should_not be_valid }
-  end
+
 end

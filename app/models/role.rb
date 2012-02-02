@@ -18,4 +18,13 @@
 class Role < ActiveRecord::Base
   attr_protected :superuser
   validates :name, presence: true
+
+  def allowed_to?(action)
+    if self.superuser
+      true
+    else
+      self.send(action)
+    end
+  end
+
 end

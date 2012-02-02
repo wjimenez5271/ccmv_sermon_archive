@@ -120,6 +120,7 @@ GEM
     rspec-expectations (2.8.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.8.0)
+    rspec-on-rails-matchers (1.0.0)
     rspec-rails (2.8.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -173,6 +174,7 @@ DEPENDENCIES
   mysql2
   rails (= 3.2.1)
   rb-fsevent
+  rspec-on-rails-matchers
   rspec-rails
   sass-rails (~> 3.2.3)
   spork

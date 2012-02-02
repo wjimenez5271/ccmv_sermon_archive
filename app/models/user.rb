@@ -19,4 +19,6 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :username, presence: true
   validates :role_id, presence: true
+
+  delegate :allowed_to, to: :role
 end
