@@ -6,7 +6,7 @@ group :development, :test do
     gem 'sqlite3'
     gem 'rspec-rails'
     gem 'guard-rspec'
-    gem 'rspec-on-rails-matchers'
+    gem 'shoulda-matchers'
 end
 
 group :development do

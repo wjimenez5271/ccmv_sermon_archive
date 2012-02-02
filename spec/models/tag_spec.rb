@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Sermon do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Tag do
+  it { should have_and_belong_to_many :sermons }
 end

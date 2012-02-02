@@ -120,7 +120,6 @@ GEM
     rspec-expectations (2.8.0)
       diff-lcs (~> 1.1.2)
     rspec-mocks (2.8.0)
-    rspec-on-rails-matchers (1.0.0)
     rspec-rails (2.8.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -137,6 +136,7 @@ GEM
       ffi (~> 1.0.9)
       multi_json (~> 1.0.4)
       rubyzip
+    shoulda-matchers (1.0.0)
     spork (0.9.0)
     sprockets (2.1.2)
       hike (~> 1.2)
@@ -174,9 +174,9 @@ DEPENDENCIES
   mysql2
   rails (= 3.2.1)
   rb-fsevent
-  rspec-on-rails-matchers
   rspec-rails
   sass-rails (~> 3.2.3)
+  shoulda-matchers
   spork
   sprockets
   sqlite3

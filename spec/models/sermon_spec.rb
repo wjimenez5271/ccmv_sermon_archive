@@ -22,6 +22,10 @@ describe Sermon do
 
   it { should be_valid }
 
+  it { should have_and_belong_to_many :tags }
+  it { should belong_to :speaker }
+  it { should belong_to :service }
+
   it { should validate_presence_of :date }
   it { should validate_presence_of :audio_path }
 
