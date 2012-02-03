@@ -1,6 +1,9 @@
 require 'spec_helper'
 
 describe Admin::SermonsController do
+  it { should route(:get, '/admin/sermons/rescan_files').to(action: :rescan_files) }
+  it { should respond_to :rescan_files }
+
   it "renders admin layout" do
     get 'index'
     should render_with_layout 'admin'

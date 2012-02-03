@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe Admin::MainController do
+  it { should route(:get, "/admin").to( action: :index ) }
+  it { admin_root_path.should == '/admin' }
   it "renders admin layout" do 
     get 'index'
     should render_with_layout 'admin'

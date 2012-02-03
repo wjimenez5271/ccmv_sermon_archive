@@ -1,13 +1,16 @@
 CcmvSermonArchive::Application.routes.draw do
   # Root Page
-  match '/(:page)' => 'main#index', as: :root, defaults: { page: 1 }
+  match '/' => 'main#index', as: :root, defaults: { page: "1" }
 
   namespace :admin do
-    match '/' => 'main#index'
+    match '/' => 'main#index', as: :root
     resources :sermons, :speakers, :services, :roles, :users,
       :except => [:show]
     get 'sermons/rescan_files'
   end
+
+  # Admin needs to go above this or else we'll match on this for /admin
+  match '/:page' => 'main#index', as: :root
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
