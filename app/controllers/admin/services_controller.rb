@@ -1,4 +1,6 @@
 class Admin::ServicesController < ApplicationController
+  layout 'admin'
+
   def index
   end
 

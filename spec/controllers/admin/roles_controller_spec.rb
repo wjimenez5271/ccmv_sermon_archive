@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe Admin::RolesController do
+  it "renders admin layout" do 
+    get 'index'
+    should render_with_layout 'admin'
+  end
 
   describe "GET 'index'" do
     it "returns http success" do

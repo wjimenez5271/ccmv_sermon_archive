@@ -24,4 +24,6 @@ class Sermon < ActiveRecord::Base
 
   delegate :name, to: :speaker, prefix: true, allow_nil: true
   delegate :name, to: :service, prefix: true, allow_nil: true
+
+  scope :prefetch_refs, includes(:speaker, :service).joins(:speaker, :service)
 end

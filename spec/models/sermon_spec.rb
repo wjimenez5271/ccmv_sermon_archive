@@ -34,5 +34,10 @@ describe Sermon do
   it { should respond_to :service_name }
   it { should handle_name_for_nil_reference :service }
 
+  it { Sermon.should respond_to :prefetch_refs }
+  # Make sure that we're doing eager loading on service and speaker
+  it { Sermon.prefetch_refs.eager_loading?.should == true }
+  it { Set.new(Sermon.prefetch_refs.joined_includes_values).should == \
+    Set.new([:service, :speaker]) }
 
 end

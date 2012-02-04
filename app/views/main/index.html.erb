@@ -2,9 +2,11 @@
 <%= render 'paginate_info' %>
 <div id="sermon_list">
   <div class="sermon_row">
-    <div class="sermon_date sermon_list_header">Date</div>
-    <div class="sermon_service sermon_list_header">Service</div>
-    <div class="sermon_speaker sermon_list_header">Speaker</div>
+    <div class="sermon_date sermon_list_header">
+      <%= sortable_column "Date", direction: :desc %>
+    </div>
+    <div class="sermon_service sermon_list_header"><%= sortable_column "Service" %></div>
+    <div class="sermon_speaker sermon_list_header"><%= sortable_column "Speaker" %></div>
   </div>
 <%= render partial: 'sermon', collection: @sermons %>
 </div>

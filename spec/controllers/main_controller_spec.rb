@@ -6,8 +6,8 @@ describe MainController do
     should render_with_layout :application
   end
 
-  it { should route(:get, "/").to( action: :index, page: 1 ) }
-  it { should route(:get, "/23").to( action: :index, page: 23 ) }
+  it { should route(:get, "/").to( action: :index, page: 1, sort: "-date" ) }
+  it { should route(:get, "/23").to( action: :index, page: 23, sort: "-date" ) }
 
   it { root_path.should == '' }
   it { root_path(5).should == '/5' }
@@ -23,4 +23,6 @@ describe MainController do
       should assign_to :sermons
     end
   end
+
+  pending "Test invalid values for page and sort"
 end

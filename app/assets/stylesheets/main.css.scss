@@ -35,7 +35,7 @@ $sermon-list-columns: $blueprint-grid-columns - ( $sermon-list-push * 2 );
     margin-bottom: 0px;
     margin-right: 0px;
 
-    .sermon_list_header {
+    .sort_asc, .sort_desc {
       font-weight: bold;
     }
 

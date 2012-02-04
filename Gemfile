@@ -43,6 +43,8 @@ end
 
 gem 'jquery-rails'
 gem 'will_paginate'
+#gem 'searchlogic'
+gem 'handles_sortable_columns'
 
 group :test do
     gem 'capybara'
