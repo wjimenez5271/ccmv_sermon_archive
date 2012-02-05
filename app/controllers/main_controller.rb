@@ -4,6 +4,7 @@ class MainController < ApplicationController
   end
 
   def index
+    params[:sort] ||= '-date'
     order = sortable_column_order do |column, direction|
       case column
       when "date"

@@ -1,6 +1,6 @@
 CcmvSermonArchive::Application.routes.draw do
   # Root Page
-  match '/' => 'main#index', as: :root, defaults: { page: "1", sort: "-date" }
+  root to: 'main#index'
 
   namespace :admin do
     match '/' => 'main#index', as: :root
@@ -10,7 +10,7 @@ CcmvSermonArchive::Application.routes.draw do
   end
 
   # Admin needs to go above this or else we'll match here for /admin
-  match '/:page' => 'main#index', as: :root, defaults: { sort: "-date" }
+  match '/:page' => 'main#index', as: :root
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

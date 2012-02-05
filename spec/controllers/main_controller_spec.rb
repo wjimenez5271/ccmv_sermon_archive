@@ -12,6 +12,24 @@ describe MainController do
   it { root_path.should == '' }
   it { root_path(5).should == '/5' }
 
+  describe "page method sanitizes correctly" do
+    { 23 => 23,
+      1 => 1,
+      nil => 1,
+      "a" => 1,
+      "abjksdf" => 1 }.each do |value, expected|
+      it do 
+        controller.stub!(:params) { { page: value } }
+        controller.page.should == expected
+      end
+    end
+  end
+
+  describe "sort behavior" do
+    pending "Test sorting behavior"
+  end
+
+
   describe "GET 'index'" do
     it "returns http success" do
       get 'index'
