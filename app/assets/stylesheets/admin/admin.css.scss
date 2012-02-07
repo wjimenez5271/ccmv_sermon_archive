@@ -2,8 +2,11 @@
 
 #admin_body {
 
-background: #7090af;
-
+#everything {
+  background: #7090af;
+  @include border-radius(15px);
+  @include column($blueprint-grid-columns, true);
+}
 
 $menubar-columns: 2;
 #menubar {
@@ -20,7 +23,7 @@ $menubar-columns: 2;
   }
 }
 
-$content-columns: $blueprint-grid-columns - $menubar-columns - 1;
+$content-columns: $blueprint-grid-columns - $menubar-columns - 1.5;
 #content {
   background: #e0e0e0;
   @include border-radius-with-padding(20px);
@@ -31,5 +34,6 @@ $content-columns: $blueprint-grid-columns - $menubar-columns - 1;
   @include push($menubar-columns);
   margin-bottom: 0;
   @include column($content-columns, true);
+  @include last;
 }
 }

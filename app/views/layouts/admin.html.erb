@@ -9,12 +9,14 @@
 <body class="bp" id="admin_body">
 
   <div class='container' id='container'>
-    <%= render 'layouts/admin_header' %>
-    <%= render 'layouts/admin_menubar' %>
-    <div id='content'>
-      <%= yield %>
+    <div id="everything">
+      <%= render 'layouts/admin_header' %>
+      <%= render 'layouts/admin_menubar' %>
+      <div id='content'>
+        <%= yield %>
+      </div>
+      <%= render 'layouts/admin_footer' %>
     </div>
-    <%= render 'layouts/admin_footer' %>
   </div>
   <%= debug(params) if Rails.env.development? %>
 </body>

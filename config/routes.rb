@@ -3,7 +3,7 @@ CcmvSermonArchive::Application.routes.draw do
   root to: 'main#index'
 
   namespace :admin do
-    match '/' => 'main#index', as: :root
+    match '/' => 'admin#index', as: :root
     resources :sermons, :speakers, :services, :roles, :users,
       :except => [:show]
     get 'sermons/rescan_files'
