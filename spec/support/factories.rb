@@ -1,10 +1,10 @@
 FactoryGirl.define do
   factory :service do
-    sequence(:name) { |n| "Service ${n}" }
+    sequence(:name) { |n| "Service #{n}" }
   end
 
   factory :speaker do
-    sequence(:name) { |n| "Speaker ${n}" }
+    sequence(:name) { |n| "Speaker #{n}" }
   end
 
   factory :sermon do |sermon|
