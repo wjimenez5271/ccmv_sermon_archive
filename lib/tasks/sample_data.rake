@@ -24,7 +24,7 @@ namespace :db do
     100.times do |n|
       month = n/30 + 1
       day = n % 30 + 1
-      date = Time.utc( 2012, month, day )
+      date = n.days.ago
       Sermon.create!(date: date,
                      audio_path: "file#{n}.mp3",
                      speaker: speakers[ n % speakers.length ],

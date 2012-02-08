@@ -6,8 +6,8 @@ describe MainController do
     should render_with_layout :application
   end
 
-  it { should route(:get, "/").to( action: :index, page: 1, sort: "-date" ) }
-  it { should route(:get, "/23").to( action: :index, page: 23, sort: "-date" ) }
+  it { should route(:get, "/").to( action: :index ) }
+  it { should route(:get, "/23").to( action: :index, page: 23 ) }
 
   it { root_path.should == '' }
   it { root_path(5).should == '/5' }
