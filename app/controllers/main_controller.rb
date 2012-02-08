@@ -3,11 +3,17 @@ class MainController < ApplicationController
     conf.indicator_class = { asc: "sort_asc", desc: "sort_desc" }
   end
 
+  def page
+    Integer(params[:page])
+  rescue
+    1
+  end
+
   def index
     params[:sort] ||= '-date'
     order = sortable_column_order do |column, direction|
       case column
-      when "date"
+      when "date", "created_at"
         "#{column} #{direction}"
       when "speaker", "service"
         "#{column.pluralize}.name #{direction}, date DESC"
@@ -16,11 +22,5 @@ class MainController < ApplicationController
       end
     end
     @sermons = Sermon.prefetch_refs.order(order).paginate(page: page)
-  end
-
-  def page
-    Integer(params[:page])
-  rescue
-    1
   end
 end

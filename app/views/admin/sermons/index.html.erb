@@ -1,2 +1,23 @@
-<p>Admin::Sermons#index</p>
-<p>Find me in app/views/admin/sermons/index.html.erb</p>
+<div id="sermons_area">
+<%= render 'paginate_info' %>
+<div id="sermon_list">
+  <div class="sermon_row">
+    <div id="date_sort" class="sermon_date sermon_list_header">
+      <%= sortable_column "Date", direction: :desc %>
+    </div>
+    <div id="service_sort" class="sermon_service sermon_list_header">
+      <%= sortable_column "Service" %>
+    </div>
+    <div id="speaker_sort" class="sermon_speaker sermon_list_header">
+      <%= sortable_column "Speaker" %>
+    </div>
+    <div id="created_at_sort" class="sermon_created_at sermon_list_header">
+      <%= sortable_column "Created At", direction: :desc %>
+    </div>
+    <!-- Empty div to take up the appropriate space -->
+    <div id="edit_sort" class="sermon_edit_link"></div>
+  </div>
+<%= render partial: 'sermon', collection: @sermons %>
+</div>
+<%= render 'paginate_info' %>
+</div>

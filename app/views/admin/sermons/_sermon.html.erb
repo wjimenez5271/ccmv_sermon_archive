@@ -1,0 +1,7 @@
+<div class="sermon_row">
+  <div class="sermon_date"><%= sermon.date %></div>
+  <div class="sermon_service"><%= sermon.service_name %></div>
+  <div class="sermon_speaker"><%= sermon.speaker_name %></div>
+  <div class="sermon_created_at"><%= sermon.created_at.to_formatted_s(:db) %></div>
+  <div class="sermon_edit"><%= link_to 'Edit', edit_admin_sermon_path(sermon.id) %></div>
+</div>

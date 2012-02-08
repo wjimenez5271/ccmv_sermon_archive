@@ -1,0 +1,4 @@
+@import "partials/base";
+$menubar-columns: 2;
+$content-columns: $blueprint-grid-columns - $menubar-columns - 1.5;
+

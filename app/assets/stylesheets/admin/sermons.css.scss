@@ -1,3 +1,38 @@
-// Place all the styles related to the admin/Sermons controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "partials/base";
+@import "partials/admin_constants";
+
+#admin_body {
+
+#sermons_area {
+  @include column($content-columns, true);
+
+  #sermon_list {
+
+    .sort_asc, .sort_desc {
+      font-weight: bold;
+    }
+
+    .sermon_row {
+      @include column($content-columns);
+
+      .sermon_date{ @include column(2); }
+      .sermon_service{ @include column(2); }
+      .sermon_speaker{ @include column(4); }
+      .sermon_created_at { @include column(5); }
+      .sermon_edit_link { @include column(2, true); }
+    }
+  }
+
+  // Styles for pagination
+  .paginate_block {
+    .pagination {
+      @include float-left;
+    }
+    .paginate_info {
+      @include float-right;
+    }
+    @include last;
+  }
+}
+
+}

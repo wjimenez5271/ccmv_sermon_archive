@@ -1,9 +1,9 @@
 require 'find'
 
-class Admin::SermonsController < ApplicationController
+class Admin::SermonsController < MainController
   layout 'admin'
-  def index
-  end
+
+  # page, index, and handles_sortable_columns are done in the superclass
 
   def new
   end

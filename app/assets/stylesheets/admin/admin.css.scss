@@ -1,4 +1,5 @@
 @import "partials/base";
+@import "partials/admin_constants";
 
 #admin_body {
 
@@ -8,7 +9,6 @@
   @include column($blueprint-grid-columns, true);
 }
 
-$menubar-columns: 2;
 #menubar {
   @include prepend-top($half-column/2);
   @include column($menubar-columns);
@@ -23,11 +23,11 @@ $menubar-columns: 2;
   }
 }
 
-$content-columns: $blueprint-grid-columns - $menubar-columns - 1.5;
 #content {
   background: #e0e0e0;
   @include border-radius-with-padding(20px);
   @include column($content-columns, true);
+  margin-bottom: 1.5em;
 }
 
 #header, #footer {
