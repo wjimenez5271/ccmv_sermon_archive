@@ -57,7 +57,7 @@ group :test do
 end
 
 # To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~> 3.0'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
@@ -73,6 +73,6 @@ group :development do
   gem 'ruby-debug19', :require => 'ruby-debug'
   # The two lines below are necessary because ruby-debug doesn't work with 1.9.3
   # Yes, really.
-  gem 'ruby-debug-base19', '~> 0.11.26'
-  gem 'linecache19', '~> 0.5.13'
+  gem 'ruby-debug-base19', '>= 0.11.26'
+  gem 'linecache19', '>= 0.5.13'
 end
