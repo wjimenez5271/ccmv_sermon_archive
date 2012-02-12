@@ -9,10 +9,10 @@ module MainHelper
   end
 
   def service_link(service_name)
-    if service == service_name
+    if service.downcase == service_name
       class_name = "service_current"
       tag_type = "span"
-      content_tag "span", service_name.capitalize,
+      content_tag "span", service_name.titleize,
         { class: "service_current service_link", 
           id: "#{service_name.downcase.parameterize('_')}_service_link" }
     else
@@ -22,7 +22,7 @@ module MainHelper
         param_value = service_name
       end
       
-      link_to service_name.capitalize, 
+      link_to service_name.titleize, 
         root_path(params.merge({ service: param_value })),
         { :class => "service_link",
           :id => "#{service_name.downcase.parameterize('_')}_service_link" }

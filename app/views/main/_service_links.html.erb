@@ -1,6 +1,7 @@
 <div id="services">
+  <span id="service_header">Services</span>
   <%= service_link "All" %>
-  <% @services.each do |service| %>
-    <%= service_link service.name %>
+  <% @service_names.each do |service| %>
+    <%= service_link service %>
   <% end %>
 </div>

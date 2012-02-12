@@ -1,5 +1,6 @@
 class MainController < ApplicationController
   helper_method :service
+  before_filter :setup_services
 
   handles_sortable_columns do |conf|
     conf.indicator_class = { asc: "sort_asc", desc: "sort_desc" }
@@ -10,10 +11,6 @@ class MainController < ApplicationController
     # default URL? Probably have to modify handles_sortable_columns to do this
     params[:sort] ||= '-date'
     
-    @services = Service.order("name ASC")
-    @service_names = @services.each_with_object([]) do |service, names|
-      names << service.name.downcase
-    end
     selected_service = service
 
     order = sortable_column_order do |column, direction|
@@ -40,12 +37,23 @@ class MainController < ApplicationController
   end
 
   def service
-    if @service_names.include?(params[:service].downcase)
-      params[:service].titleize
-    else
-      "All"
+    @service
+  end
+
+  def setup_services
+    @services = Service.order("name ASC")
+    @service_names = @services.each_with_object([]) do |service, names|
+      names << service.name.downcase
     end
-  rescue
-    "All"
+
+    begin
+      if @service_names.include?(params[:service].downcase)
+        @service = params[:service].titleize
+      else
+        @service = "All"
+      end
+    rescue
+      @service = "All"
+    end
   end
 end

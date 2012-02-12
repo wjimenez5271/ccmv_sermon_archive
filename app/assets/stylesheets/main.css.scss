@@ -27,11 +27,22 @@ $sermon-list-columns: $blueprint-grid-columns - ( $sermon-list-push * 2 );
   @include append($blueprint-grid-columns - $sermon-list-columns - $sermon-list-push);
   @include clearfix;
 
+  $content-background: #e0e0e0;
+
+  #services {
+    background: $content-background;
+    @include border-radius(10);
+    #service_header { font-weight: bold; }
+    .service_current { font-style: italic; }
+    padding-left: 10px;
+  }
+    
+
   #sermon_list {
     @include column-with-border-radius-padding($sermon-list-columns, 20px);
     @include last;
 
-    background: #e0e0e0;
+    background: $content-background;
     margin-bottom: 0px;
     margin-right: 0px;
 
