@@ -10,7 +10,7 @@ CcmvSermonArchive::Application.routes.draw do
   end
 
   # Admin needs to go above this or else we'll match here for /admin
-  match '/:page' => 'main#index', as: :root
+  #match '/:page' => 'main#index', as: :root
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
