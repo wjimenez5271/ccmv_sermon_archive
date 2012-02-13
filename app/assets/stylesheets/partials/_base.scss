@@ -44,9 +44,15 @@ $half-column: ($blueprint-grid-width + $blueprint-grid-margin) / 2;
 }
 
 @mixin inner-shadow {
-  @include single-box-shadow( #808080, -2px, -2px, 1px, 1px, true );
-  padding-bottom: 2px;
+  @include single-box-shadow(#505050, -2px, -2px, 1px, 1px, true);
+  padding-bottom: 3px;
   margin-bottom: 0.5em;
+}
+
+@mixin single-row-selector {
+  @include padding($half-column, 0, 0);
+  @include border-radius(10px);
+  @include inner-shadow;
 }
 
 // Styles common to both main and admin sections. This shouldn't contain

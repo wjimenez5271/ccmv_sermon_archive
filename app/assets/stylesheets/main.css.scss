@@ -31,10 +31,7 @@ $sermon-list-columns: $blueprint-grid-columns - ( $sermon-list-push * 2 );
 
   #services {
     background: $content-background;
-    @include padding($half-column, 0, 0);
-    @include border-radius(10px);
-    @include inner-shadow;
-    margin-bottom: 0.5em;
+    @include single-row-selector;
     #service_header {
       font-weight: bold; 
       padding-right: 10px;
@@ -49,9 +46,9 @@ $sermon-list-columns: $blueprint-grid-columns - ( $sermon-list-push * 2 );
     
 
   #sermon_list {
+    @include inner-shadow;
     @include column-with-border-radius-padding($sermon-list-columns, 20px);
     @include last;
-    @include inner-shadow;
 
     background: $content-background;
     margin-right: 0px;
@@ -74,9 +71,7 @@ $sermon-list-columns: $blueprint-grid-columns - ( $sermon-list-push * 2 );
 
   // Styles for pagination
   .paginate_block {
-    @include padding($half-column, 0, 0);
-    @include inner-shadow;
-    @include border-radius(10px);
+    @include single-row-selector;
     background: $content-background;
     .pagination {
       @include float-left;
