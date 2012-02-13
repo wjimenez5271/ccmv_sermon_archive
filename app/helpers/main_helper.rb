@@ -1,11 +1,15 @@
 module MainHelper
-  def full_title(page_title)
+  def full_title(page_title='')
     base_title = "CCMV Sermon Archive"
-    if page_title.empty?
-      base_title
-    else
-      "#{base_title} | #{page_title}"
+    if not page_title.empty?
+      base_title << " | #{page_title}"
     end
+
+    if service.downcase != "all"
+      base_title << " | #{service.titleize}"
+    end
+
+    base_title
   end
 
   def service_link(service_name)

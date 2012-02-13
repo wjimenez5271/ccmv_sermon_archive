@@ -6,9 +6,11 @@
     <div id="date_sort" class="sermon_date sermon_list_header">
       <%= sortable_column "Date", direction: :desc %>
     </div>
-    <div id="service_sort" class="sermon_service sermon_list_header">
-      <%= sortable_column "Service" %>
-    </div>
+    <% if @show_field[:service] %>
+      <div id="service_sort" class="sermon_service sermon_list_header">
+        <%= sortable_column "Service" %>
+      </div>
+    <% end %>
     <div id="speaker_sort" class="sermon_speaker sermon_list_header">
       <%= sortable_column "Speaker" %>
     </div>
