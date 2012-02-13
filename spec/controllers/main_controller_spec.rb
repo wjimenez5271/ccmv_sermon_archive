@@ -7,17 +7,15 @@ describe MainController do
   end
 
   it { should route(:get, "/").to( action: :index ) }
-  it { should route(:get, "/23").to( action: :index, page: 23 ) }
 
-  it { root_path.should == '' }
-  it { root_path(5).should == '/5' }
+  it { root_path.should == '/' }
 
-  describe "page method sanitizes correctly" do
+  describe "page parameter is verified" do
     { 23 => 23,
       1 => 1,
       nil => 1,
-      "a" => 1,
-      "abjksdf" => 1 }.each do |value, expected|
+      "abc" => 1,
+      ";abjksdf" => 1 }.each do |value, expected|
       it do 
         controller.stub!(:params) { { page: value } }
         controller.page.should == expected
@@ -25,10 +23,27 @@ describe MainController do
     end
   end
 
+  describe "service parameter is verified" do
+    { "Sunday" => "Sunday",
+      "sunday" => "Sunday",
+      "Thursday" => "Thursday",
+      "thursday" => "Thursday",
+      "All" => "All",
+      "monday" => "All",
+      nil => "All",
+      "Sunday;" => "All" }.each do |value, expected|
+      it do
+        controller.stub!(:service_names) { [ "sunday", "thursday" ] }
+        controller.stub!(:params) { { service: value } }
+        get 'index'
+        controller.service.should == expected
+      end
+    end
+  end
+
   describe "sort behavior" do
     pending "Test sorting behavior"
   end
-
 
   describe "GET 'index'" do
     it "returns http success" do
@@ -39,6 +54,7 @@ describe MainController do
     it do
       get 'index'
       should assign_to :sermons
+      should assign_to :services
     end
   end
 
