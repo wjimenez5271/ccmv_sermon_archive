@@ -54,7 +54,7 @@ describe MainController do
     it do
       get 'index'
       should assign_to :sermons
-      should assign_to :services
+      should assign_to :service_names
     end
   end
 

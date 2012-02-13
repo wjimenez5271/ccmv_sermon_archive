@@ -24,10 +24,11 @@ class MainController < ApplicationController
       end
     end
 
-    # TODO Make this more efficient. Don't include service column if
-    # selected_service has a value. Match on service id instead of name?
+    @show_field = { service: selected_service == "All" }
     @sermons = Sermon.prefetch_refs.order(order).paginate(page: page)
-    @sermons = @sermons.where("services.name = ?", selected_service) if selected_service != "All"
+    @sermons = @sermons.where("services.name = ?", selected_service) \
+      unless @show_field[:service]
+      
   end
 
   def page
@@ -45,9 +46,8 @@ class MainController < ApplicationController
   end
 
   def setup_services
-    @services = Service.order("name ASC")
-    @service_names = @services.each_with_object([]) do |service, names|
-      names << service.name.downcase
+    @service_names = Service.order("name ASC").collect(&:name).each do |name|
+      name.downcase!
     end
 
     begin

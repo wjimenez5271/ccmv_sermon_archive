@@ -1,12 +1,22 @@
 require 'spec_helper'
 
 describe MainHelper do
-  it { helper.full_title('').should == 'CCMV Sermon Archive' }
-  it { helper.full_title('AbCd').should == 'CCMV Sermon Archive | AbCd' }
+  describe "full_title" do
+    before { helper.stub!(:service) { "All" } }
+    it { helper.full_title('').should == 'CCMV Sermon Archive' }
+    it { helper.full_title('AbCd').should == 'CCMV Sermon Archive | AbCd' }
+    it do
+      helper.stub!(:service) { 'service b' }
+      helper.full_title('').should == 'CCMV Sermon Archive | Service B'
+    end
+    it do
+      helper.stub!(:service) { 'service 1' }
+      helper.full_title('AbCd').should == 'CCMV Sermon Archive | AbCd | Service 1' 
+    end
+  end
   describe "service_link" do
     services = [ "All", "all", "service 1", "service 2",
       "Service 1", "a b c" ]
-    #services = [ "service 1" ]
 
     services.each do |selected_service|
       services.each do |service_name|

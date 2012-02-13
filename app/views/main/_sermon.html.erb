@@ -1,5 +1,7 @@
 <div class="sermon_row">
   <div class="sermon_date"><a href="/media/<%= sermon.audio_path %>"><%= sermon.date %></a></div>
-  <div class="sermon_service"><%= sermon.service_name %></div>
+  <% if @show_field[:service] %>
+    <div class="sermon_service"><%= sermon.service_name %></div>
+  <% end %>
   <div class="sermon_speaker"><%= sermon.speaker_name %></div>
 </div>

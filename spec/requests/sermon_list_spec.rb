@@ -87,6 +87,7 @@ describe "Sermon List" do
 
   describe "service selectors" do
     it "should change services correctly" do
+      header = "CCMV Sermon Archive"
       visit root_path
       should_not have_link('All')
       should have_link('Service 1', href: '/?service=service+1&sort=-date')
@@ -95,6 +96,10 @@ describe "Sermon List" do
       should_not have_css('#service_1_service_link.service_current')
       should have_css('a.service_link', text: 'Service 1' )
       should have_css('a.service_link', text: 'Service 2' )
+      should have_css('#service_sort a.SortableColumnLink', text: "Service")
+      should have_css('.sermon_service', text: "Service 1")
+      should have_css('.sermon_service', text: "Service 2")
+      should have_content(header)
       
       click_link 'Service 1'
       should have_link('All', href: '/?sort=-date')
@@ -105,6 +110,10 @@ describe "Sermon List" do
       should have_css('span.service_link', text: 'Service 1' )
       should_not have_css('a.service_link', text: 'Service 1' )
       should have_css('a.service_link', text: 'Service 2' )
+      should_not have_css('#service_sort a.SortableColumnLink', text: "Service")
+      should_not have_css('.sermon_service', text: "Service 1")
+      should_not have_css('.sermon_service', text: "Service 2")
+      should have_content("#{header} | Service 1")
 
       click_link 'All'
       should_not have_link('All')
@@ -113,6 +122,10 @@ describe "Sermon List" do
       should_not have_css('#service_1_service_link.service_current')
       should have_css('a.service_link', text: 'Service 1' )
       should have_css('a.service_link', text: 'Service 2' )
+      should have_css('#service_sort a.SortableColumnLink', text: "Service")
+      should have_css('.sermon_service', text: "Service 1")
+      should have_css('.sermon_service', text: "Service 2")
+      should have_content(header)
     end
 
     it "should switch to page 1 and keep sort when selecting a service" do
