@@ -23,7 +23,7 @@ describe MainController do
     end
   end
 
-  describe "service parameter is verified" do
+  describe "service parameter" do
     { "Sunday" => "Sunday",
       "sunday" => "Sunday",
       "Thursday" => "Thursday",
@@ -32,11 +32,20 @@ describe MainController do
       "monday" => "All",
       nil => "All",
       "Sunday;" => "All" }.each do |value, expected|
-      it do
-        controller.stub!(:service_names) { [ "sunday", "thursday" ] }
-        controller.stub!(:params) { { service: value } }
-        get 'index'
-        controller.service.should == expected
+      describe "value #{value} expects #{expected}" do
+        before(:each) do
+          controller.stub!(:service_names) { [ "sunday", "thursday" ] }
+          controller.stub!(:params) { { service: value } }
+          get 'index'
+        end
+
+        it "verifies the service parameter" do
+          controller.service.should == expected
+        end
+
+        it "assigns show_field correctly" do
+          assigns(:show_field).should == { "service" => expected == "All" }
+        end
       end
     end
   end
