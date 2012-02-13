@@ -31,19 +31,29 @@ $sermon-list-columns: $blueprint-grid-columns - ( $sermon-list-push * 2 );
 
   #services {
     background: $content-background;
-    @include border-radius(10);
-    #service_header { font-weight: bold; }
+    @include padding($half-column, 0, 0);
+    @include border-radius(10px);
+    @include inner-shadow;
+    margin-bottom: 0.5em;
+    #service_header {
+      font-weight: bold; 
+      padding-right: 10px;
+    }
     .service_current { font-style: italic; }
-    padding-left: 10px;
+    .service_link {
+      font-weight: 500;
+      margin-left: 5px;
+      margin-right: 5px;
+    }
   }
     
 
   #sermon_list {
     @include column-with-border-radius-padding($sermon-list-columns, 20px);
     @include last;
+    @include inner-shadow;
 
     background: $content-background;
-    margin-bottom: 0px;
     margin-right: 0px;
 
     .sort_asc, .sort_desc {
@@ -58,12 +68,16 @@ $sermon-list-columns: $blueprint-grid-columns - ( $sermon-list-push * 2 );
       .sermon_speaker { @include column(4, true); }
       // These are unused for now.
       .sermon_title { @include column(10); }
-      .sermon_passage{ @include column(4); }
+      .sermon_passage { @include column(4); }
     }
   }
 
   // Styles for pagination
   .paginate_block {
+    @include padding($half-column, 0, 0);
+    @include inner-shadow;
+    @include border-radius(10px);
+    background: $content-background;
     .pagination {
       @include float-left;
     }
@@ -71,6 +85,7 @@ $sermon-list-columns: $blueprint-grid-columns - ( $sermon-list-push * 2 );
       @include float-right;
     }
     @include last;
+    @include clearfix;
   }
 }
 

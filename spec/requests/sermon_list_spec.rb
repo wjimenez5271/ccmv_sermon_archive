@@ -8,7 +8,7 @@ describe "Sermon List" do
     @sermons = []
     @speakers.each do |speaker|
       @services.each do |service|
-        10.times do
+        20.times do
           @sermons << 
               FactoryGirl.create(:sermon, service:service, speaker:speaker)
         end
@@ -89,7 +89,7 @@ describe "Sermon List" do
     it "should change services correctly" do
       visit root_path
       should_not have_link('All')
-      should have_link('Service 1', href: '/?service=Service+1&sort=-date')
+      should have_link('Service 1', href: '/?service=service+1&sort=-date')
       should have_css('#all_service_link.service_current', text: 'All' )
       should have_css('#service_1_service_link.service_link')
       should_not have_css('#service_1_service_link.service_current')
@@ -97,18 +97,18 @@ describe "Sermon List" do
       should have_css('a.service_link', text: 'Service 2' )
       
       click_link 'Service 1'
-      print page.html
       should have_link('All', href: '/?sort=-date')
       should_not have_link('Service 1')
       should have_css('#service_1_service_link.service_current', 'Service 1')
       should have_css('#service_1_service_link.service_link')
       should_not have_css('#all_service_link.service_current')
-      should have_css('a.service_link', text: 'Service 1' )
-      should_not have_css('a.service_link', text: 'Service 2' )
+      should have_css('span.service_link', text: 'Service 1' )
+      should_not have_css('a.service_link', text: 'Service 1' )
+      should have_css('a.service_link', text: 'Service 2' )
 
       click_link 'All'
       should_not have_link('All')
-      should have_link('Service 1', href: '/?service=Service+1&sort=-date')
+      should have_link('Service 1', href: '/?service=service+1&sort=-date')
       should have_css('#all_service_link.service_current', 'All')
       should_not have_css('#service_1_service_link.service_current')
       should have_css('a.service_link', text: 'Service 1' )
@@ -117,7 +117,8 @@ describe "Sermon List" do
 
     it "should switch to page 1 and keep sort when selecting a service" do
       visit root_path(page: 2, sort:'speaker')
-      click_link 'Thursday'
+      should have_css('div.pagination em.current', text:'2')
+      click_link 'Service 1'
       should have_css('div.pagination em.current', text:'1')
       should have_css('#speaker_sort a.sort_asc')
     end

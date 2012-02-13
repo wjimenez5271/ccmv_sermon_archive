@@ -40,6 +40,10 @@ class MainController < ApplicationController
     @service
   end
 
+  def service_names
+    @service_names
+  end
+
   def setup_services
     @services = Service.order("name ASC")
     @service_names = @services.each_with_object([]) do |service, names|
@@ -47,7 +51,7 @@ class MainController < ApplicationController
     end
 
     begin
-      if @service_names.include?(params[:service].downcase)
+      if service_names.include?(params[:service].downcase)
         @service = params[:service].titleize
       else
         @service = "All"

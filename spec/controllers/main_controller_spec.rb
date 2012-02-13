@@ -33,7 +33,9 @@ describe MainController do
       nil => "All",
       "Sunday;" => "All" }.each do |value, expected|
       it do
+        controller.stub!(:service_names) { [ "sunday", "thursday" ] }
         controller.stub!(:params) { { service: value } }
+        get 'index'
         controller.service.should == expected
       end
     end
