@@ -5,12 +5,15 @@ describe "Sermon List" do
   before(:all) do
     @speakers = Array.new(2) { FactoryGirl.create(:speaker) }
     @services = Array.new(2) { FactoryGirl.create(:service) }
+    @books = Array.new(2) { FactoryGirl.create(:book) }
     @sermons = []
     @speakers.each do |speaker|
       @services.each do |service|
-        20.times do
-          @sermons << 
-              FactoryGirl.create(:sermon, service:service, speaker:speaker)
+        @books.each do |book|
+          10.times do
+            @sermons << 
+                FactoryGirl.create(:sermon, service:service, speaker:speaker, book:book)
+          end
         end
       end
     end

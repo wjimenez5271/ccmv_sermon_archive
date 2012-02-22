@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120131072934) do
+ActiveRecord::Schema.define(:version => 20120222043732) do
+
+  create_table "books", :force => true do |t|
+    t.string  "name",          :limit => 20,                    :null => false
+    t.boolean "old_testament",               :default => false
+  end
+
+  add_index "books", ["name"], :name => "index_books_on_name"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -29,15 +36,20 @@ ActiveRecord::Schema.define(:version => 20120131072934) do
   create_table "sermons", :force => true do |t|
     t.string   "title"
     t.date     "date"
-    t.string   "passage"
     t.string   "summary"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
     t.string   "audio_path"
     t.integer  "speaker_id"
     t.integer  "service_id"
+    t.integer  "book_id"
+    t.integer  "start_chapter"
+    t.integer  "end_chapter"
+    t.integer  "start_verse"
+    t.integer  "end_verse"
   end
 
+  add_index "sermons", ["book_id", "start_chapter", "start_verse"], :name => "index_sermons_on_book_id_and_start_chapter_and_start_verse"
   add_index "sermons", ["date"], :name => "index_sermons_on_date"
 
   create_table "sermons_tags", :force => true do |t|

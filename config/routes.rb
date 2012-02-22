@@ -1,4 +1,6 @@
 CcmvSermonArchive::Application.routes.draw do
+  get "sermons/index"
+
   # Root Page
   root to: 'main#index'
 
