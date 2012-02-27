@@ -40,6 +40,7 @@ gem 'jquery-rails'
 gem 'will_paginate'
 #gem 'searchlogic'
 gem 'handles_sortable_columns'
+gem 'bible_reference_parser'
 
 group :test do
     gem 'capybara'

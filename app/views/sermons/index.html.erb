@@ -3,17 +3,10 @@
 <%= render 'paginate_info' %>
 <div id="sermon_list">
   <div class="sermon_row">
-    <div id="date_sort" class="sermon_date sermon_list_header">
-      <%= sortable_column "Date", direction: :desc %>
-    </div>
-    <% if @show_field[:service] %>
-      <div id="service_sort" class="sermon_service sermon_list_header">
-        <%= sortable_column "Service" %>
-      </div>
-    <% end %>
-    <div id="speaker_sort" class="sermon_speaker sermon_list_header">
-      <%= sortable_column "Speaker" %>
-    </div>
+    <%= field_header :date, :desc %>
+    <%= field_header :service %>
+    <%= field_header :speaker %>
+    <%= field_header :passage %>
   </div>
 <%= render partial: 'sermon', collection: @sermons %>
 </div>

@@ -3,5 +3,8 @@
   <% if @show_field[:service] %>
     <div class="sermon_service"><%= sermon.service_name %></div>
   <% end %>
-  <div class="sermon_speaker"><%= sermon.speaker_name %></div>
+  <% if @show_field[:speaker] %>
+    <div class="sermon_speaker"><%= sermon.speaker_name %></div>
+  <% end %>
+  <div class="sermon_passage"><%= sermon.passage %></div>
 </div>
