@@ -32,6 +32,7 @@ class Sermon < ActiveRecord::Base
   delegate :name, to: :book, prefix: true, allow_nil: true
 
   scope :prefetch_refs, includes(:speaker, :service).joins(:speaker, :service)
+  scope :sermons_per_book, group(:book_id).order(:book_id).select([[:book_id, :book_name]).count()
 
   def passage
     p = book_name

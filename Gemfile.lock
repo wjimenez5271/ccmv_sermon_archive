@@ -31,6 +31,7 @@ GEM
     annotate (2.4.1.beta1)
     ansi (1.4.2)
     arel (3.0.0)
+    bible_reference_parser (0.1.4)
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -171,6 +172,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (~> 2.4.1.beta)
+  bible_reference_parser
   capybara
   coffee-rails (~> 3.2.1)
   compass-rails

@@ -25,7 +25,7 @@ module SermonsHelper
       end
       
       link_to service_name.titleize, 
-        root_path(params.merge({ service: param_value, page: nil })),
+        sermons_path(params.merge({ service: param_value, page: nil })),
         { :class => "service_link", :id => id }
     end
   end
@@ -37,5 +37,44 @@ module SermonsHelper
       s << sortable_column field.titleize
       s << "\n</div>\n"
     end
+  end
+
+  def more_recent_sermons_link
+
+  end
+
+  def book_selection_links
+    # This assumes that we have at least one sermon for an Old Testament book.
+    links_per_row = 5
+
+    s = '<div id="book_links">\n'
+
+    s << '<p>Old Testament</p>\n'
+    last_ot = true
+    link_num = 0
+    s << '<div class="book_link_row">'
+    sermons_per_book do |book, count|
+      if book == nil
+        next
+      end
+      name = book['name'].name.titleize
+
+      if last_ot != book.old_testament
+        s << '</div>\n<p>New Testament</p>\n<div class="book_link_row">\n'
+        last_ot = book.old_testament
+        link_num = 0
+      else
+        link_num += 1
+        if link_num == links_per_row
+          s << '</div>\n<div class="book_link_row">'
+          link_num = 0
+        end
+      end
+
+      s << link_to name, book_path(name), { :class => "book_link" }
+      
+    end
+
+    s << '</div></div>'
   end
 end

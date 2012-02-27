@@ -2,7 +2,8 @@ class SermonsController < ApplicationController
   helper_method :books
   helper_method :service
   helper_method :show_field
-  before_filter :setup_services
+  helper_method :sermons_for_book
+  before_filter :setup_data
 
   handles_sortable_columns do |conf|
     conf.indicator_class = { asc: "sort_asc", desc: "sort_desc" }
@@ -71,7 +72,13 @@ class SermonsController < ApplicationController
     @service_names
   end
 
-  def setup_services(default_service="Sunday")
+  def sermons_per_book
+    Sermon.count_per_book
+  end
+
+  def setup_data
+    default_service = "All"
+
     @service_names = Service.order("name ASC").collect(&:name).each do |name|
       name.downcase!
     end
