@@ -2,10 +2,24 @@ CcmvSermonArchive::Application.routes.draw do
   get "sermons/index"
 
   # Root Page
-  root to: 'main#index'
+  root to: 'sermons#main'
+
+  match '/sermons', to: 'sermons#index', as: 'sermons'
+  match '/service/:service', to: 'sermons#index', as: 'service'
+  match '/speaker/:speaker', to: 'sermons#index', as: 'speaker'
+  match '/book/:book', to: 'sermons#index', as: 'book'
+  match '/passage/:passage', to: 'sermons#index', as: 'passage'
+  match '/sermons/:id', to: 'sermons#show', as: 'sermon'
+  # TODO Figure this out and ensure consistency across all
+
+  scope '/tfth', defaults: { tfth: "true" } do
+    root to: 'sermons#main', as: 'tfth_root'
+    match '/sermons/:id', to: 'sermons#show', as: 'tfth_sermon'
+    match '/sermons', to: 'sermons#index', as: 'tfth_sermons'
+  end
 
   namespace :admin do
-    match '/' => 'main#index', as: :root
+    match '/' => 'sermons#main', as: :root
     resources :sermons, :speakers, :services, :roles, :users,
       :except => [:show]
     get 'sermons/rescan_files'

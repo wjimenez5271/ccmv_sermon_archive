@@ -1,41 +1,54 @@
 class SermonsController < ApplicationController
-  helper_method :books
   helper_method :service
   helper_method :show_field
-  helper_method :sermons_for_book
-  before_filter :setup_data
+  helper_method :sermons_per_book
 
   handles_sortable_columns do |conf|
     conf.indicator_class = { asc: "sort_asc", desc: "sort_desc" }
   end
+
+  # TODO Add a function that calculates the defaults for variou things based on the
+  # parameters passed in.
 
   def index
     # TODO Find a better way to do this that doesn't tack -date on to the
     # default URL? Probably have to modify handles_sortable_columns to do this
     params[:sort] ||= '-date'
     
-    selected_service = service
-
-    @show_field = { service: selected_service == "All",
-      speaker: selected_service != 'Sunday' }
+    if params[:tfth]
+      show_field.merge( { service: false, speaker: false } )
+    else
+      show_field[:service] = service == "All"
+      show_field[:speaker] = service != 'Sunday'
+    end
     @sermons = Sermon.prefetch_refs.order(sort_order).paginate(page: page)
-    @sermons = @sermons.where("services.name = ?", selected_service) \
-      unless @show_field[:service]
+    @sermons = where_clause(@sermons)
       
   end
 
-  def main
-    @show_field = { service: false, speaker: false }
-    @latest_sermon = Sermon.where("services.name = ?", selected_service).order("date DESC").limit(1)
-    @books = Book.all
+  def show
+    @sermon = Sermon.find(params[:id])
+    # Other text lookup or whatever needs to be done here
   end
 
-  def show_field(field)
-    if @show_field.include?(field)
-      @show_field[field]
-    else
-      true
+  def main
+    show_field.merge( { service: false, speaker: false } )
+    @latest_sermon = Sermon.order("date DESC").limit(1)
+    @latest_sermon = where_clause(@latest_sermon)
+  end
+
+  def where_clause(obj)
+    obj = obj.where("services.name = ?", service) unless show_field[:service]
+    obj = obj.where("speaker.name = ?", speaker) unless show_field[:speaker]
+    obj = obj.where("book.name = ?", book.name) unless book == nil
+  end
+
+
+  def show_field
+    if not defined? @show_field
+      @show_field = Hash.new(true)
     end
+    @show_field
   end
 
   def sort_order
@@ -54,43 +67,72 @@ class SermonsController < ApplicationController
     end
   end
 
+  def where_clause(object)
+    if service != @default_service
+      object = object.where("services.name=?", service)
+    end
+
+    if book != nil
+      object = object.where("book_id=?", book.id)
+    end
+
+    if speaker != nil
+
+  end
+
   def page
     Integer(params[:page])
   rescue
     1
   end
 
-  def books
-    @books
+  def book
+    # TODO Do some abbreviation parsing here.
+    if not defined? @book
+      if params.include? :book
+        @book = Book.where("name=?", params[:book]).first
+      else
+        @book = nil
+      end
+    end
+    @book
   end
 
   def service
+    if not defined? @service
+      # TODO default should be nil, helper should handle it
+      @default_service = "All"
+
+      begin
+        # TODO Do this with a simple where statement instead?
+        # Or maybe not since we often need to get the service names anyway
+        if service_names.include?(params[:service].downcase)
+          @service = params[:service].titleize
+        else
+          @service = @default_service
+        end
+      rescue
+        @service = @default_service
+      end
+
+    end
     @service
   end
 
   def service_names
+    if not defined? @service_names
+      @service_names = Service.order("name ASC").collect(&:name).each do |name|
+        name.downcase!
+      end
+    end
     @service_names
   end
 
-  def sermons_per_book
-    Sermon.count_per_book
-  end
-
-  def setup_data
-    default_service = "All"
-
-    @service_names = Service.order("name ASC").collect(&:name).each do |name|
-      name.downcase!
+  def active_books
+    if not defined? @active_books
+      sermons = Sermon.group(:book_id).includes(:book).joins(:book).order(:book_id)
+      @active_books = sermons.each_with_object([]) { |l, s| l << s.book }
     end
-
-    begin
-      if service_names.include?(params[:service].downcase)
-        @service = params[:service].titleize
-      else
-        @service = default_service
-      end
-    rescue
-      @service = default_service
-    end
+    @active_books
   end
 end

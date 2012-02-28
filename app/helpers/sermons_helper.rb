@@ -53,12 +53,7 @@ module SermonsHelper
     last_ot = true
     link_num = 0
     s << '<div class="book_link_row">'
-    sermons_per_book do |book, count|
-      if book == nil
-        next
-      end
-      name = book['name'].name.titleize
-
+    active_books do |book|
       if last_ot != book.old_testament
         s << '</div>\n<p>New Testament</p>\n<div class="book_link_row">\n'
         last_ot = book.old_testament
@@ -71,7 +66,7 @@ module SermonsHelper
         end
       end
 
-      s << link_to name, book_path(name), { :class => "book_link" }
+      s << link_to book.name, book_path(book.name), { :class => "book_link" }
       
     end
 
