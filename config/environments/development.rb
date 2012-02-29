@@ -34,4 +34,9 @@ CcmvSermonArchive::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Define per-domain layouts
+  config.domain_layouts[ /ccmv/ ] = :ccmv
+  config.domain_layouts[ /localhost/ ] = :ccmv
+  config.domain_layouts[ /localtfth/ ] = :tfth
 end

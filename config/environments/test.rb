@@ -34,4 +34,8 @@ CcmvSermonArchive::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  # Define per-domain layouts
+  config.domain_layouts[ /test1/ ] = :ccmv
+  config.domain_layouts[ /test2/ ] = :tfth
 end

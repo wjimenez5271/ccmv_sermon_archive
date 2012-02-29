@@ -55,5 +55,8 @@ module CcmvSermonArchive
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.domain_layouts = Hash::new( :ccmv )
+    config.domain_layouts_cache = {}
   end
 end
