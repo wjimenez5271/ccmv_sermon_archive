@@ -1,3 +1,4 @@
+<% @base_title = 'CCMV Sermon Archive' %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,20 +7,21 @@
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
-<body class="bp" id="main_body">
+<body class="bp ccmv" id="main_body">
   <div class='container' id='container'>
 
     <div id='content'>
       <div id='header'>
-        <%= render 'layouts/main_header' %>
+        <%= render 'layouts/ccmv_header' %>
       </div>
       <%= yield %>
       <div id='footer'>
-        <%= render 'layouts/main_footer' %>
+        <%= render 'layouts/ccmv_footer' %>
       </div>
     </div>
 
   </div>
+  <h1>CCMV Layout</h1>
   <%= debug(params) if Rails.env.development? %>
 </body>
 </html>

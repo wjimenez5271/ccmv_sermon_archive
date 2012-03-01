@@ -38,4 +38,7 @@ CcmvSermonArchive::Application.configure do
   # Define per-domain layouts
   config.domain_layouts[ /test1/ ] = 'ccmv'
   config.domain_layouts[ /test2/ ] = 'tfth'
+
+  # Define per-domain search restrictions
+  config.domain_search_restrictions[ /test2/ ] = { speaker: "Rick Franks" }
 end

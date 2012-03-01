@@ -1,0 +1,27 @@
+<% @base_title = 'Truth from the Heart' %>
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= tfth_title(yield(:title)) %></title>
+  <%= render 'layouts/stylesheets' %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body class="bp tfth" id="main_body">
+  <div class='container' id='container'>
+
+    <div id='content'>
+      <div id='header'>
+        <%= render 'layouts/tfth_header' %>
+      </div>
+      <%= yield %>
+      <div id='footer'>
+        <%= render 'layouts/tfth_footer' %>
+      </div>
+    </div>
+
+  </div>
+  <h1>TFTH Layout</h1>
+  <%= debug(params) if Rails.env.development? %>
+</body>
+</html>

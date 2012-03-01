@@ -44,6 +44,16 @@ $sermon-list-columns: $blueprint-grid-columns - ( $sermon-list-push * 2 );
     }
   }
     
+  .sermon_row {
+    @include column($sermon-list-columns);
+
+    .sermon_date { @include column(2); }
+    .sermon_service { @include column(2); }
+    .sermon_speaker { @include column(4, true); }
+    // These are unused for now.
+    .sermon_title { @include column(10); }
+    .sermon_passage { @include column(4); }
+  }
 
   #sermon_list {
     @include inner-shadow;
@@ -58,16 +68,6 @@ $sermon-list-columns: $blueprint-grid-columns - ( $sermon-list-push * 2 );
       font-weight: bold;
     }
 
-    .sermon_row {
-      @include column($sermon-list-columns);
-
-      .sermon_date { @include column(2); }
-      .sermon_service { @include column(2); }
-      .sermon_speaker { @include column(4, true); }
-      // These are unused for now.
-      .sermon_title { @include column(10); }
-      .sermon_passage { @include column(4); }
-    }
   }
 
   // Styles for pagination

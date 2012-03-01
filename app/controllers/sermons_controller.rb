@@ -1,27 +1,23 @@
 class SermonsController < ApplicationController
   helper_method :service
+  helper_method :speaker
+  helper_method :book
   helper_method :show_field
-  helper_method :sermons_per_book
+  helper_method :active_books
+  helper_method :domain_search_restrictions
   layout :domain_specific_layout
 
-  handles_sortable_columns do |conf|
+  handles_sortable_columns(:only => [:index]) do |conf|
     conf.indicator_class = { asc: "sort_asc", desc: "sort_desc" }
+    conf.default_sort_value = '-date'
   end
 
   # TODO Add a function that calculates the defaults for variou things based on the
   # parameters passed in.
 
   def index
-    # TODO Find a better way to do this that doesn't tack -date on to the
-    # default URL? Probably have to modify handles_sortable_columns to do this
-    params[:sort] ||= '-date'
-    
-    if params[:tfth]
-      show_field.merge( { service: false, speaker: false } )
-    else
-      show_field[:service] = service == "All"
-      show_field[:speaker] = service != 'Sunday'
-    end
+    show_field[:service] = service == "All"
+    show_field[:speaker] = speaker == nil
     @sermons = Sermon.prefetch_refs.order(sort_order).paginate(page: page)
     @sermons = where_clause(@sermons)
       
@@ -36,12 +32,23 @@ class SermonsController < ApplicationController
     show_field.merge( { service: false, speaker: false } )
     @latest_sermon = Sermon.order("date DESC").limit(1)
     @latest_sermon = where_clause(@latest_sermon)
+    @latest_sermon = @latest_sermon.first
   end
 
   def where_clause(obj)
-    obj = obj.where("services.name = ?", service) unless show_field[:service]
-    obj = obj.where("speaker.name = ?", speaker) unless show_field[:speaker]
-    obj = obj.where("book.name = ?", book.name) unless book == nil
+    if service
+      obj = obj.where("services.name = ?", service)
+    end
+
+    if speaker
+      obj = obj.where("speaker.name = ?", speaker)
+    end
+
+    if book
+      obj = obj.where("book.name = ?", book.name)
+    end
+
+    obj
   end
 
 
@@ -61,24 +68,11 @@ class SermonsController < ApplicationController
         "#{column.pluralize}.name #{direction}, date DESC"
       when "passage"
         "book_id #{direction}, start_chapter #{direction}, " + \
-          "start_verse #{direction}, date #{direction""
+          "start_verse #{direction}, date #{direction}"
       else
         "date DESC"
       end
     end
-  end
-
-  def where_clause(object)
-    if service != @default_service
-      object = object.where("services.name=?", service)
-    end
-
-    if book != nil
-      object = object.where("book_id=?", book.id)
-    end
-
-    if speaker != nil
-
   end
 
   def page
@@ -87,11 +81,21 @@ class SermonsController < ApplicationController
     1
   end
 
+  def speaker
+    if not defined? @speaker
+      @speaker = domain_search_restrictions[:speaker]
+      @speaker ||= params[:speaker]
+    end
+    @speaker
+  end
+
   def book
-    # TODO Do some abbreviation parsing here.
+    # TODO Do some abbreviation parsing on params[:book]
     if not defined? @book
-      if params.include? :book
-        @book = Book.where("name=?", params[:book]).first
+      # TODO Sanitize params[:book]
+      book = domain_search_restrictions[:book] or params[:book]
+      if book
+        @book = Book.where("name=?", book).first
       else
         @book = nil
       end
@@ -101,21 +105,22 @@ class SermonsController < ApplicationController
 
   def service
     if not defined? @service
-      # TODO default should be nil, helper should handle it
-      @default_service = "All"
-
-      begin
-        # TODO Do this with a simple where statement instead?
-        # Or maybe not since we often need to get the service names anyway
-        if service_names.include?(params[:service].downcase)
-          @service = params[:service].titleize
-        else
-          @service = @default_service
+      @service = domain_search_restrictions[:service]
+      if not @service
+        begin
+          # TODO Do this with a simple where statement instead?
+          # Or maybe not since we often need to get the service names anyway
+          if service_names.include?(params[:service].downcase)
+            @service = params[:service]
+          else
+            @service = nil
+          end
+        rescue
+          @service = nil
         end
-      rescue
-        @service = @default_service
       end
 
+      @service = @service.titleize if @service
     end
     @service
   end
@@ -132,7 +137,7 @@ class SermonsController < ApplicationController
   def active_books
     if not defined? @active_books
       sermons = Sermon.group(:book_id).includes(:book).joins(:book).order(:book_id)
-      @active_books = sermons.each_with_object([]) { |l, s| l << s.book }
+      @active_books = sermons.each_with_object([]) { |s, l| l << s.book }
     end
     @active_books
   end

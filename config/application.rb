@@ -56,7 +56,9 @@ module CcmvSermonArchive
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    # Define the domain layouts hash with the default layout.
+    # Define the domain layouts hash and the default layout.
     config.domain_layouts = Hash::new( 'ccmv' )
+    # Define search restrictions for a domain
+    config.domain_search_restrictions = {}
   end
 end

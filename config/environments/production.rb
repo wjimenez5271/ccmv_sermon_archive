@@ -66,6 +66,13 @@ CcmvSermonArchive::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # Define per-domain layouts
+  config.domain_layouts[ /tfth/ ] = 'tfth'
   config.domain_layouts[ /truthfromtheheart/ ] = 'tfth'
   config.domain_layouts[ /ccmv/ ] = 'ccmv'
+
+  # Define per-domain search restrictions
+  config.domain_search_restrictions_cache[ /tfth/ ] = 
+    { speaker: "Rick Franks" }
+  config.domain_search_restrictions[ /truthfromtheheart/ ] = 
+    { speaker: "Rick Franks" }
 end
