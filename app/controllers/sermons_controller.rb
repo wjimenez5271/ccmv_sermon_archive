@@ -2,6 +2,7 @@ class SermonsController < ApplicationController
   helper_method :service
   helper_method :show_field
   helper_method :sermons_per_book
+  layout :domain_specific_layout
 
   handles_sortable_columns do |conf|
     conf.indicator_class = { asc: "sort_asc", desc: "sort_desc" }

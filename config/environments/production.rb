@@ -66,6 +66,6 @@ CcmvSermonArchive::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # Define per-domain layouts
-  config.domain_layouts[ /truthfromtheheart/ ] = :tfth
-  config.domain_layouts[ /ccmv/ ] = :ccmv
+  config.domain_layouts[ /truthfromtheheart/ ] = 'tfth'
+  config.domain_layouts[ /ccmv/ ] = 'ccmv'
 end

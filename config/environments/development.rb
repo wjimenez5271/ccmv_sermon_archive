@@ -36,7 +36,7 @@ CcmvSermonArchive::Application.configure do
   config.assets.debug = true
 
   # Define per-domain layouts
-  config.domain_layouts[ /ccmv/ ] = :ccmv
-  config.domain_layouts[ /localhost/ ] = :ccmv
-  config.domain_layouts[ /localtfth/ ] = :tfth
+  config.domain_layouts[ /ccmv/ ] = 'ccmv'
+  config.domain_layouts[ /localhost/ ] = 'ccmv'
+  config.domain_layouts[ /localtfth/ ] = 'tfth'
 end
