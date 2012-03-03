@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.1'
+gem 'rails', '3.2.2'
 
 group :development, :test do
     gem 'sqlite3'
@@ -39,7 +39,7 @@ end
 gem 'jquery-rails'
 gem 'will_paginate'
 #gem 'searchlogic'
-gem 'handles_sortable_columns'
+gem 'handles_sortable_columns', :git => "git://github.com/dimfeld/handles_sortable_columns.git"
 gem 'bible_reference_parser'
 
 group :test do

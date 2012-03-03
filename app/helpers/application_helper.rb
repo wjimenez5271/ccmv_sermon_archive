@@ -30,6 +30,7 @@ module ApplicationHelper
       end
       s << page_title
     end
+    s
   end
 
 end

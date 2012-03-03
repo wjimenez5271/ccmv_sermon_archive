@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120222043732) do
+ActiveRecord::Schema.define(:version => 20120303224853) do
 
   create_table "books", :force => true do |t|
     t.string  "name",          :limit => 20,                    :null => false
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(:version => 20120222043732) do
     t.integer  "end_verse"
   end
 
-  add_index "sermons", ["book_id", "start_chapter", "start_verse"], :name => "index_sermons_on_book_id_and_start_chapter_and_start_verse"
+  add_index "sermons", ["book_id", "start_chapter", "start_verse", "end_chapter", "end_verse"], :name => "index_sermons_on_passage"
   add_index "sermons", ["date"], :name => "index_sermons_on_date"
 
   create_table "sermons_tags", :force => true do |t|

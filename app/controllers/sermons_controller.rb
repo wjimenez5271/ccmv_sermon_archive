@@ -12,20 +12,37 @@ class SermonsController < ApplicationController
     conf.default_sort_value = '-date'
   end
 
+  handles_sortable_columns(:only => [:book_index]) do |conf|
+    conf.indicator_class = { asc: "sort_asc", desc: "sort_desc" }
+    conf.default_sort_value = 'passage'
+  end
+
   # TODO Add a function that calculates the defaults for variou things based on the
   # parameters passed in.
 
   def index
-    show_field[:service] = service == "All"
+    show_field[:service] = service == nil
     show_field[:speaker] = speaker == nil
     @sermons = Sermon.prefetch_refs.order(sort_order).paginate(page: page)
     @sermons = where_clause(@sermons)
       
   end
 
+  def book_index
+    # This is a hack so I can use a different handles_sortable_columns
+    # configuration. There's probably a cleaner way to do this.
+    index
+    render :index
+  end
+
+
   def show
     @sermon = Sermon.find(params[:id])
     # Other text lookup or whatever needs to be done here
+    if not @sermon
+      # TODO return a 404 or something instead?
+      redirect_to root_path
+    end
   end
 
   def main
@@ -45,7 +62,7 @@ class SermonsController < ApplicationController
     end
 
     if book
-      obj = obj.where("book.name = ?", book.name)
+      obj = obj.where("books.name = ?", book.name)
     end
 
     obj
@@ -68,7 +85,8 @@ class SermonsController < ApplicationController
         "#{column.pluralize}.name #{direction}, date DESC"
       when "passage"
         "book_id #{direction}, start_chapter #{direction}, " + \
-          "start_verse #{direction}, date #{direction}"
+          "start_verse #{direction}, end_chapter #{direction}, " + \
+          "end_verse #{direction}, date #{direction}"
       else
         "date DESC"
       end
@@ -93,9 +111,10 @@ class SermonsController < ApplicationController
     # TODO Do some abbreviation parsing on params[:book]
     if not defined? @book
       # TODO Sanitize params[:book]
-      book = domain_search_restrictions[:book] or params[:book]
-      if book
-        @book = Book.where("name=?", book).first
+      b = domain_search_restrictions[:book] || params[:book]
+      puts "########### Book = #{b}"
+      if b
+        @book = Book.where("name=?", b).first
       else
         @book = nil
       end
