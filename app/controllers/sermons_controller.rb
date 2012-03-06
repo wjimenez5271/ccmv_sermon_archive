@@ -112,7 +112,6 @@ class SermonsController < ApplicationController
     if not defined? @book
       # TODO Sanitize params[:book]
       b = domain_search_restrictions[:book] || params[:book]
-      puts "########### Book = #{b}"
       if b
         @book = Book.where("name=?", b).first
       else
