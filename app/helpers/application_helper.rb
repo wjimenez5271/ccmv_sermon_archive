@@ -4,8 +4,8 @@ module ApplicationHelper
     link_to name, file, *args
   end
 
-  def full_title(page_title=nil)
-    s = tfth_title(page_title)
+  def full_title(page_title='', base_title='')
+    s = tfth_title(page_title, base_title)
 
     if service
       if not s.blank?
@@ -20,9 +20,11 @@ module ApplicationHelper
       end
       s << service.titleize
     end
+
+    s
   end
 
-  def tfth_title(page_title=nil)
+  def tfth_title(page_title='', base_title='')
     s = String.new( base_title )
     if page_title and not page_title.empty?
       if not s.blank?

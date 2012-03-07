@@ -47,7 +47,7 @@ class SermonsController < ApplicationController
 
   def main
     show_field.merge( { service: false, speaker: false } )
-    @latest_sermon = Sermon.order("date DESC").limit(1)
+    @latest_sermon = Sermon.prefetch_refs.order("date DESC").limit(1)
     @latest_sermon = where_clause(@latest_sermon)
     @latest_sermon = @latest_sermon.first
   end

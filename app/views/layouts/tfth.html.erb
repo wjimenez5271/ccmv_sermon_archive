@@ -1,8 +1,7 @@
-<% @base_title = 'Truth from the Heart' %>
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= tfth_title(yield(:title)) %></title>
+  <title><%= tfth_title(yield(:title), 'Truth from the Heart') %></title>
   <%= render 'layouts/stylesheets' %>
   <%= javascript_include_tag "application" %>
   <%= stylesheet_link_tag "ccmv", :media => "all" %>

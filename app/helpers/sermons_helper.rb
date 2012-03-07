@@ -67,8 +67,6 @@ module SermonsHelper
     end
 
     s << '</tr></table></div>'
-    puts s
-    puts s.html_safe
     s.html_safe
   end
 end
