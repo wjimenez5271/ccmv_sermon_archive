@@ -5,13 +5,37 @@
   <title><%= full_title(yield(:title)) %></title>
   <%= render 'layouts/stylesheets' %>
   <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "ccmv", :media => "all" %>
   <%= csrf_meta_tags %>
   <meta name="robots" content="index, follow" />
   <meta name="keywords" content="CCMV.org, Calvary Chapel, Calvary Chapel Mountain View, Mountain View churches, Mountain View, nondenominational churches, nondenominational churches, ministries, california churches, contemporary worship, Silicon Valley, children's church, sunday school, child care, youth group, missions, community church, the Word of God" />
   <meta name="description" content="We are a nondenominational Christian fellowship located in the heart of the  Silicon Valley. Our focus is on teaching the word of God through the power of  the Holy Spirit and heartfelt contemporary worship of our Lord and Savior Jesus  Christ. We have a variety of ministries available to help you draw closer to  God. We pray the resources and information on this web site will help you in  your spiritual growth." />
+  <style type="text/css">
+          div.wrapper { margin: 0 auto; width: 962px;padding:0;}
+          div.main-column-left { width:250px;padding:0;}
+          div.main-column-right { width:250px;padding:0;}
+          div.main-column-middle { margin-left:250px;margin-right:250px;padding:0;}
+          #main-content2 { margin-right:0px;padding:0;}
+          #inset { width:0px;padding:0;}
+  </style>	
+ 
+<script type="text/javascript">
+window.addEvent('domready', function() {
+	new Rokmoomenu($E('ul.menutop '), {
+		bgiframe: false,
+		delay: 500,
+		animate: {
+			props: ['width', 'opacity'],
+			opts: {
+				duration:600,
+				fps: 200,
+				transition: Fx.Transitions.Sine.easeOut			}
+		}
+	});
+});
+</script>
 </head>
-<body class="bp ccmv" id="main_body">
-  <div class='container' id='container'>
+<body class="bp ccmv f-default iehandle" id="ff-palatino">
 
   <div id="page-bg">
     <div id='content'>
@@ -20,7 +44,13 @@
         <%= render 'layouts/ccmv_header' %>
       </div>
       <!-- End Header -->
-      <%= yield %>
+      <div id="section-two"><div class="top">
+        <div class='container' id='container'>
+            <div id="main-content">
+              <%= yield %>
+            </div>
+        </div></div>
+      </div>
       <!-- Begin Footer -->
       <div id='footer'>
         <%= render 'layouts/ccmv_footer' %>
@@ -28,7 +58,6 @@
       <!-- End Footer -->
     </div>
 
-  </div>
   <h1>CCMV Layout</h1>
   <%= debug(params) if Rails.env.development? %>
 </body>

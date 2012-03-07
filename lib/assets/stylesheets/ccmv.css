@@ -1,0 +1,10 @@
+/* Manifest file for CCMV theme.
+ *= require_self
+ *= require template_css
+ *= require template_css_ccmv
+ *= require style4
+ *= require system
+ *= require general
+ *= require typography
+ *= require rokmoomenu
+ */

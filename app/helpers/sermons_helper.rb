@@ -40,29 +40,35 @@ module SermonsHelper
 
     s = '<div id="book_links">'
 
-    s << '<p>Old Testament</p>'
+    s << '<h4>Old Testament</h4>'
     last_ot = true
     link_num = 0
-    s << '<div class="book_link_row">'
+    s << '<table class="book_links_table"><tr class="book_link_row">'
+
     active_books.each do |book|
       if last_ot != book.old_testament
-        s << '</div><p>New Testament</p><div class="book_link_row">'
+        s << '</tr></table><h4>New Testament</h4><table class="book_links_table"><tr class="book_link_row">'
         last_ot = book.old_testament
         link_num = 0
-      else
-        link_num += 1
-        if link_num == links_per_row
-          s << '</div><div class="book_link_row">'
-          link_num = 0
-        end
       end
 
+      if link_num == links_per_row
+        s << '</tr><tr class="book_link_row">'
+        link_num = 1
+      else
+        link_num += 1
+      end
+
+      s << '<td>'
       s << link_to(book.name, book_path(ERB::Util.url_encode(book.name)), 
                    { :class => "book_link" } )
+      s << '</td>'
       
     end
 
-    s << '</div></div>'
+    s << '</tr></table></div>'
+    puts s
+    puts s.html_safe
     s.html_safe
   end
 end

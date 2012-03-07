@@ -5,20 +5,57 @@
   <title><%= tfth_title(yield(:title)) %></title>
   <%= render 'layouts/stylesheets' %>
   <%= javascript_include_tag "application" %>
+  <%= stylesheet_link_tag "ccmv", :media => "all" %>
   <%= csrf_meta_tags %>
+  <style type="text/css">
+          div.wrapper { margin: 0 auto; width: 962px;padding:0;}
+          div.main-column-left { width:250px;padding:0;}
+          div.main-column-right { width:250px;padding:0;}
+          div.main-column-middle { margin-left:250px;margin-right:250px;padding:0;}
+          #main-content2 { margin-right:0px;padding:0;}
+          #inset { width:0px;padding:0;}
+  </style>	
+ 
+<script type="text/javascript">
+window.addEvent('domready', function() {
+	new Rokmoomenu($E('ul.menutop '), {
+		bgiframe: false,
+		delay: 500,
+		animate: {
+			props: ['width', 'opacity'],
+			opts: {
+				duration:600,
+				fps: 200,
+				transition: Fx.Transitions.Sine.easeOut			}
+		}
+	});
+});
+</script>
+  
 </head>
 <body class="bp tfth" id="main_body">
-  <div class='container' id='container'>
+  <div id="page-bg">
 
     <div id='content'>
+      <!-- Begin Header -->
       <div id='header'>
         <%= render 'layouts/tfth_header' %>
       </div>
-      <%= yield %>
+      <!-- End Header -->
+      <div id="section-two">
+        <div class='container' id='container'>
+          <div id="main-content">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+      <!-- Begin Footer -->
       <div id='footer'>
         <%= render 'layouts/tfth_footer' %>
       </div>
+      <!-- End Footer -->
     </div>
+  </div>
 
   </div>
   <h1>TFTH Layout</h1>
