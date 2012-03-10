@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
   <title><%= tfth_title(yield(:title), 'Truth from the Heart') %></title>
   <%= render 'layouts/stylesheets' %>
   <%= javascript_include_tag "application" %>
-  <%= stylesheet_link_tag "ccmv", :media => "all" %>
+  <%= stylesheet_link_tag "tfth", :media => "all" %>
   <%= csrf_meta_tags %>
   <style type="text/css">
           div.wrapper { margin: 0 auto; width: 962px;padding:0;}
@@ -32,32 +32,32 @@ window.addEvent('domready', function() {
 </script>
   
 </head>
-<body class="bp tfth" id="main_body">
+<body class="bp tfth f-default iehandle" id="ff-palatino">
   <div id="page-bg">
 
     <div id='content'>
       <!-- Begin Header -->
       <div id='header'>
-        <%= render 'layouts/tfth_header' %>
+        <%= render 'layouts/ccmv_header' %>
       </div>
       <!-- End Header -->
       <div id="section-two">
-        <div class='container' id='container'>
-          <div id="main-content">
-            <%= yield %>
+        <div class="top">
+          <div class='container' id='container'>
+            <div id="main-content">
+              <%= yield %>
+            </div>
           </div>
         </div>
       </div>
       <!-- Begin Footer -->
       <div id='footer'>
-        <%= render 'layouts/tfth_footer' %>
+        <%= render 'layouts/ccmv_footer' %>
       </div>
       <!-- End Footer -->
     </div>
   </div>
 
-  </div>
-  <h1>TFTH Layout</h1>
-  <%= debug(params) if Rails.env.development? %>
+</div>
 </body>
 </html>

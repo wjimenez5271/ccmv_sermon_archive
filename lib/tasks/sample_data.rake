@@ -3,9 +3,10 @@ namespace :db do
   task :sample_data => :environment do
     Rake::Task['db:reset'].invoke
     
-    speaker_names = [ "Rick Franks",
-      "Guillermo Careaga",
+    speaker_names = [ 
       "Phil Warden",
+      "Rick Franks",
+      "Guillermo Careaga",
       "Tosh Woods",
       "Mark Eldridge",
       "Mike Duarte",

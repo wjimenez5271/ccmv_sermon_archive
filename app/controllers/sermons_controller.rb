@@ -58,7 +58,7 @@ class SermonsController < ApplicationController
     end
 
     if speaker
-      obj = obj.where("speaker.name = ?", speaker)
+      obj = obj.where("speakers.name = ?", speaker)
     end
 
     if book

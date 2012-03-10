@@ -38,17 +38,20 @@ window.addEvent('domready', function() {
 <body class="bp ccmv f-default iehandle" id="ff-palatino">
 
   <div id="page-bg">
+    <div id='content'>
       <!-- Begin Header -->
       <div id='header'>
         <%= render 'layouts/ccmv_header' %>
       </div>
       <!-- End Header -->
-      <div id="section-two"><div class="top">
-        <div class='container' id='container'>
+      <div id="section-two">
+        <div class="top">
+          <div class='container' id='container'>
             <div id="main-content">
               <%= yield %>
             </div>
-        </div></div>
+          </div>
+        </div>
       </div>
       <!-- Begin Footer -->
       <div id='footer'>
@@ -56,8 +59,6 @@ window.addEvent('domready', function() {
       </div>
       <!-- End Footer -->
     </div>
-
-  <h1>CCMV Layout</h1>
-  <%= debug(params) if Rails.env.development? %>
+  </div>
 </body>
 </html>
