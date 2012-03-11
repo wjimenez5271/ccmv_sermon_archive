@@ -1,0 +1,10 @@
+<div id="sermon_links">
+<h4 id='all_sermons_link'><%= link_to 'View All Sermons', sermons_path %></h4>
+<% if not domain_search_restrictions.include?(:book) %>
+  <%= book_selection_links %>
+<% end %>
+
+<% if not domain_search_restrictions.include?(:service) %>
+  <%= render 'service_links' %>
+<% end %>
+</div>

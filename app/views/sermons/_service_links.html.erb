@@ -1,7 +1,9 @@
 <div id="services">
-  <span id="service_header">Services</span>
-  <%= service_link "All" %>
+  <h4>Services</h3>
+  <div class="sermons_link_table">
+<%= service_link "All" %>
   <% @service_names.each do |service| %>
-    <%= service_link service %>
+    <span><%= service_link service %></span>
   <% end %>
+</div>
 </div>

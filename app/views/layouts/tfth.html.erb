@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html> 
 <html>
 <head>
   <title><%= tfth_title(yield(:title), 'Truth from the Heart') %></title>
@@ -45,7 +45,9 @@ window.addEvent('domready', function() {
         <div class="top">
           <div class='container' id='container'>
             <div id="main-content">
-              <%= yield %>
+              <div id="indented-content">
+                <%= yield %>
+              </div>
             </div>
           </div>
         </div>

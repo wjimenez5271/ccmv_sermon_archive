@@ -72,7 +72,7 @@ CcmvSermonArchive::Application.configure do
 
   # Define per-domain search restrictions
   config.domain_search_restrictions_cache[ /tfth/ ] = 
-    { speaker: "Rick Franks" }
+    { speaker: "Rick Franks", service: nil }
   config.domain_search_restrictions[ /truthfromtheheart/ ] = 
-    { speaker: "Rick Franks" }
+    { speaker: "Rick Franks", service: nil }
 end

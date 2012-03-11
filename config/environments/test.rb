@@ -40,5 +40,6 @@ CcmvSermonArchive::Application.configure do
   config.domain_layouts[ /test2/ ] = 'tfth'
 
   # Define per-domain search restrictions
-  config.domain_search_restrictions[ /test2/ ] = { speaker: "Rick Franks" }
+  config.domain_search_restrictions[ /test2/ ] =
+    { speaker: "Rick Franks", service: nil }
 end

@@ -8,7 +8,7 @@ CcmvSermonArchive::Application.routes.draw do
   match '/service/:service', to: 'sermons#index', as: 'service'
   match '/speaker/:speaker', to: 'sermons#index', as: 'speaker'
   match '/book/:book', to: 'sermons#book_index', as: 'book'
-  match '/passage/:passage', to: 'sermons#index', as: 'passage'
+  match '/passage/:passage', to: 'sermons#passage_index', as: 'passage'
   match '/sermons/:id', to: 'sermons#show', as: 'sermon'
 
   namespace :admin do

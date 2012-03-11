@@ -8,13 +8,12 @@ module SermonsHelper
         { :class => "service_current service_link", :id => id  }
     else
       if service_name.downcase == "all"
-        param_value = nil
+        path = sermons_path
       else
-        param_value = service_name
+        path = service_path( ERB::Util.url_encode(service_name) )
       end
       
-      link_to service_name.titleize, 
-        sermons_path(params.merge({ service: param_value, page: nil })),
+      link_to service_name.titleize, path,
         { :class => "service_link", :id => id }
     end
   end
@@ -29,10 +28,6 @@ module SermonsHelper
     end
   end
 
-  def all_sermons_link
-
-  end
-
   def book_selection_links
     # TODO Put this into a partial
     # This assumes that we have at least one sermon for an Old Testament book.
@@ -43,11 +38,11 @@ module SermonsHelper
     s << '<h4>Old Testament</h4>'
     last_ot = true
     link_num = 0
-    s << '<table class="book_links_table"><tr class="book_link_row">'
+    s << '<table class="sermons_link_table"><tr class="book_link_row">'
 
     active_books.each do |book|
       if last_ot != book.old_testament
-        s << '</tr></table><h4>New Testament</h4><table class="book_links_table"><tr class="book_link_row">'
+        s << '</tr></table><h4>New Testament</h4><table class="sermons_link_table"><tr class="book_link_row">'
         last_ot = book.old_testament
         link_num = 0
       end

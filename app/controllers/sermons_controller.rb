@@ -5,6 +5,7 @@ class SermonsController < ApplicationController
   helper_method :show_field
   helper_method :active_books
   helper_method :domain_search_restrictions
+  helper_method :unselected_params
   layout :domain_specific_layout
 
   handles_sortable_columns(:only => [:index]) do |conf|
@@ -12,7 +13,7 @@ class SermonsController < ApplicationController
     conf.default_sort_value = '-date'
   end
 
-  handles_sortable_columns(:only => [:book_index]) do |conf|
+  handles_sortable_columns(:only => [:book_index, :passage_index]) do |conf|
     conf.indicator_class = { asc: "sort_asc", desc: "sort_desc" }
     conf.default_sort_value = 'passage'
   end
@@ -29,12 +30,21 @@ class SermonsController < ApplicationController
   end
 
   def book_index
-    # This is a hack so I can use a different handles_sortable_columns
-    # configuration. There's probably a cleaner way to do this.
+    if not book
+      redirect_to :root
+    else
+      # This is a hack so I can use a different handles_sortable_columns
+      # configuration. There's probably a cleaner way to do this.
+      index
+      render :index
+    end
+  end
+
+  def passage_index
+    # TODO This isn't done yet. Just do a by-passage sort for now.
     index
     render :index
   end
-
 
   def show
     @sermon = Sermon.find(params[:id])
@@ -46,8 +56,8 @@ class SermonsController < ApplicationController
   end
 
   def main
-    show_field.merge( { service: false, speaker: false } )
-    @latest_sermon = Sermon.prefetch_refs.order("date DESC").limit(1)
+    show_field.merge!( { service: false, speaker: false } )
+    @latest_sermon = Sermon.prefetch_refs.order("date DESC")
     @latest_sermon = where_clause(@latest_sermon)
     @latest_sermon = @latest_sermon.first
   end
@@ -159,4 +169,15 @@ class SermonsController < ApplicationController
     end
     @active_books
   end
+
+  def params_without_selectors
+    if not defined? @params_without_selectors
+      @params_without_selectors = Hash.new( params )
+      [ :service, :book, :speaker, :page ].each do |key|
+        @params_without_selectors.delete key
+      end
+    end
+    @params_without_selectors
+  end
+
 end

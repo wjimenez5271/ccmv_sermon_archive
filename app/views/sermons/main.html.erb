@@ -1,9 +1,7 @@
-<h3>Most Recent Sermon:</h3>
+<h3>Most Recent Sermon</h3>
 <div id="sermons_area">
 <%= render partial: "sermon", object: @latest_sermon %>
 </div>
 
-<h3>Sermon Archives</h3>
-<%= book_selection_links %>
-
-<%= all_sermons_link %>
+<h3>Sermon Archive</h3>
+<%= render 'sermon_links' %>
