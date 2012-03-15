@@ -18,13 +18,20 @@ module SermonsHelper
     end
   end
 
-  def field_header(field, sort_direction=:asc)
-    if show_field[field]
-      field = field.to_s
-      s = "<div id=\"#{field}_sort\" class=\"sermon_#{field} sermon_list_header>\">\n"
-      s << sortable_column(field.titleize, direction: sort_direction)
-      s << "\n</div>\n"
-      s.html_safe
+  def speaker_link(speaker_name)
+    id = "#{speaker_name.downcase.parameterize('_')}_speaker_link"
+    if speaker and speaker.downcase == speaker_name.downcase
+      content_tag "span", speaker_name.titleize,
+        { :class => "speaker_current speaker_link", :id => id  }
+    else
+      if speaker_name.downcase == "all"
+        path = sermons_path
+      else
+        path = speaker_path( ERB::Util.url_encode(speaker_name) )
+      end
+      
+      link_to speaker_name.titleize, path,
+        { :class => "speaker_link", :id => id }
     end
   end
 

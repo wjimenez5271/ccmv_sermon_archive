@@ -1,10 +1,11 @@
 <div class="sermon_row">
-  <div class="sermon_date"><a href="/media/<%= sermon.audio_path %>"><%= sermon.date %></a></div>
+  <div class="sermon_field sermon_date"><a href="/media/<%= sermon.audio_path %>"><%= sermon.date %></a></div>
   <% if show_field[:service] %>
-    <div class="sermon_service"><%= sermon.service_name %></div>
+    <div class="sermon_field sermon_service"><%= sermon.service_name.titleize %></div>
   <% end %>
   <% if show_field[:speaker] %>
-    <div class="sermon_speaker"><%= sermon.speaker_name %></div>
+    <div class="sermon_field sermon_speaker"><%= sermon.speaker_name.titleize %></div>
   <% end %>
-  <div class="sermon_passage"><%= sermon.passage %></div>
+  <div class="sermon_field sermon_title"><%= sermon.title.titleize %></div>
+  <div class="sermon_field sermon_passage"><%= sermon.passage %></div>
 </div>

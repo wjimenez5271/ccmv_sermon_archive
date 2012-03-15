@@ -28,8 +28,8 @@ margin-right: 30px;
 
 h3 {
   @include push($sermon-list-push / 2);
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 5px;
   font-size: medium;
   color: #333333;
 }
@@ -38,14 +38,21 @@ h3 {
   background: $content-background;
 
   .sermon_row {
-    @include column($sermon-list-columns);
+    @include column($sermon-list-columns, true);
 
+    .sermon_audio { @include column(1); }
+    .sermon_video { @include column(1); }
     .sermon_date { @include column(3); }
     .sermon_service { @include column(2); }
-    .sermon_speaker { @include column(4, true); }
-    // These are unused for now.
-    .sermon_title { @include column(10); }
-    .sermon_passage { @include column(7); }
+    .sermon_speaker { @include column(3); }
+    .sermon_title { @include column(7); }
+    .sermon_passage { @include column(5); }
+
+    .sermon_field { min-height: 1px; }
+    .sermon_list_header {
+      min-height: 1px; 
+      font-weight: 600;
+    }
   }
 
   #sermon_list {
@@ -86,38 +93,33 @@ h3 {
 
 }
 
+#sermon_archive {
+  @include column($sermon-list-columns, true);
+  @include clearfix;
+  margin-top: 20px;
+}
+
 #sermon_links {
   @include column($sermon-list-columns, true);
   @include clearfix;
-  h4 {
-    text-align: center;
+
+  #all_sermons_link {
+    margin-top: 0px;
+    margin-bottom: 0px;
     font-size: medium;
   }
+}
 
-  .sermons_link_table {
-    width: 100%;
-    text-align: center;
-
-    td {
-      text-align: center;
-    }
-
-    span {
-      margin-left: 30px;
-      margin-right: 30px;
-    }
-
+.sermon_links_column {
+  @include column(5);
+  h4 {
+    font-size: medium;
+    margin-top: 15px;
   }
+  a { display: block; }
 
-  #services {
-    .service_current { font-style: italic; }
-    .service_link {
-      font-weight: 500;
-      margin-left: 5px;
-      margin-right: 5px;
-    }
-  }
-    
+  .book_current, .service_current, .speaker_current { font-style: italic; }
+
 }
 }
 }

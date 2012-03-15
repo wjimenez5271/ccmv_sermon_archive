@@ -6,7 +6,12 @@ class SermonsController < ApplicationController
   helper_method :active_books
   helper_method :domain_search_restrictions
   helper_method :unselected_params
+  helper_method :speaker_names
+  helper_method :service_names
+  helper_method :show_all_sermons_link
   layout :domain_specific_layout
+
+  caches_page :index, :book_index, :passage_index, :show, :main
 
   handles_sortable_columns(:only => [:index]) do |conf|
     conf.indicator_class = { asc: "sort_asc", desc: "sort_desc" }
@@ -22,11 +27,12 @@ class SermonsController < ApplicationController
   # parameters passed in.
 
   def index
-    show_field[:service] = service == nil
-    show_field[:speaker] = speaker == nil
+    show_field[:service] = (service == nil) && \
+      !domain_search_restrictions.include?(:service)
+    show_field[:speaker] = (speaker == nil) && \
+      !domain_search_restrictions.include?(:speaker)
     @sermons = Sermon.prefetch_refs.order(sort_order).paginate(page: page)
     @sermons = where_clause(@sermons)
-      
   end
 
   def book_index
@@ -56,10 +62,15 @@ class SermonsController < ApplicationController
   end
 
   def main
-    show_field.merge!( { service: false, speaker: false } )
-    @latest_sermon = Sermon.prefetch_refs.order("date DESC")
-    @latest_sermon = where_clause(@latest_sermon)
-    @latest_sermon = @latest_sermon.first
+    show_field.merge!( { service: !domain_search_restrictions.include?(:service), 
+                         speaker: !domain_search_restrictions.include?(:speaker) } )
+    @sermons = Sermon.prefetch_refs.order("date DESC")
+    @sermons = where_clause(@sermons)
+    if domain_search_restrictions.include? :service
+      @sermons = [ @sermons.first ]
+    else
+      @sermons = @sermons.group(:service_id)
+    end
   end
 
   def where_clause(obj)
@@ -76,6 +87,23 @@ class SermonsController < ApplicationController
     end
 
     obj
+  end
+
+  def show_all_sermons_link
+    if params[:action] == 'main'
+      return true
+    end
+
+    show = book != nil
+    if !domain_search_restrictions.include?(:service)
+      show ||= service
+    end
+
+    if !domain_search_restrictions.include?(:speaker)
+      show ||= speaker
+    end
+
+    show
   end
 
 
@@ -113,6 +141,7 @@ class SermonsController < ApplicationController
     if not defined? @speaker
       @speaker = domain_search_restrictions[:speaker]
       @speaker ||= params[:speaker]
+      @speaker = @speaker.downcase if @speaker
     end
     @speaker
   end
@@ -147,8 +176,7 @@ class SermonsController < ApplicationController
           @service = nil
         end
       end
-
-      @service = @service.titleize if @service
+      @service = @service.downcase if @service
     end
     @service
   end
@@ -162,9 +190,28 @@ class SermonsController < ApplicationController
     @service_names
   end
 
+  def speaker_names
+    if not defined? @speaker_names
+      @speaker_names = Speaker.order("name ASC").collect(&:name).each do |name|
+        name.downcase!
+      end
+    end
+    @speaker_names
+  end
+
   def active_books
     if not defined? @active_books
       sermons = Sermon.group(:book_id).includes(:book).joins(:book).order(:book_id)
+      if domain_search_restrictions[:speaker]
+        sermons = sermons.prefetch_refs
+        sermons = sermons.where("speakers.name=?", 
+                                domain_search_restrictions[:speaker].downcase)
+      end
+      if domain_search_restrictions[:service]
+        sermons = sermons.prefetch_refs
+        sermons = sermons.where("services.name=?", 
+                                domain_search_restrictions[:service].downcase)
+      end
       @active_books = sermons.each_with_object([]) { |s, l| l << s.book }
     end
     @active_books

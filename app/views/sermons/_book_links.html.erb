@@ -1,0 +1,28 @@
+<div id="book_links"><div class="sermon_links_column">
+  <h4>Old Testament</h4>
+  <% 
+    last_ot = true
+    active_books.each do |b|
+  %>
+    <% if last_ot != b.old_testament %>
+        </div><div class="sermon_links_column">
+        <h4>New Testament</h4>
+    <% 
+        last_ot = b.old_testament
+      end 
+    
+      class_str = 'book_link'
+      if book and ( b.name == book.name )
+    %>
+      <div class="book_current"><%= b.name %></div>
+    <%
+      else
+    %>
+      <%= link_to(b.name, book_path(ERB::Util.url_encode(b.name)), 
+        { :class => 'book_link' } ) %>
+
+  <%  end 
+    end 
+  %>
+
+</div></div>

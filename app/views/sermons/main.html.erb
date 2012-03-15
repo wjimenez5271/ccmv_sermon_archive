@@ -1,7 +1,10 @@
-<h3>Most Recent Sermon</h3>
+<h3>Most Recent</h3>
 <div id="sermons_area">
-<%= render partial: "sermon", object: @latest_sermon %>
+  <%= render partial: "sermons_header", locals: { sortable: false } %>
+  <%= render partial: "sermon", collection: @sermons %>
 </div>
 
-<h3>Sermon Archive</h3>
-<%= render 'sermon_links' %>
+<div id="sermon_archive">
+  <h3>Sermon Archive</h3>
+  <%= render 'sermon_links' %>
+</div>

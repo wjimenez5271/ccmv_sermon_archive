@@ -18,7 +18,7 @@ module ApplicationHelper
       if not s.blank?
         s << ' | '
       end
-      s << service.titleize
+      s << speaker.titleize
     end
 
     s

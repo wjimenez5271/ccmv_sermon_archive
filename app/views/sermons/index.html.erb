@@ -1,12 +1,7 @@
 <div id="sermons_area">
 <%= render 'paginate_info' %>
 <div id="sermon_list">
-  <div class="sermon_row">
-    <%= field_header :date, :desc %>
-    <%= field_header :service %>
-    <%= field_header :speaker %>
-    <%= field_header :passage %>
-  </div>
+<%= render "sermons_header" %>
 <%= render partial: 'sermon', collection: @sermons %>
 </div>
 <%= render 'paginate_info' %>

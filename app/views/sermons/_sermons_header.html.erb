@@ -1,0 +1,12 @@
+<% if not defined? sortable 
+     sortable = true
+   end
+%>
+<div class="sermon_row">
+<%= render partial: "field_header", locals: { field: :date, sortable: sortable,
+                                              sort_direction: :desc } %>
+<%= render partial: "field_header", locals: { field: :service, sortable: sortable } %>
+<%= render partial: "field_header", locals: { field: :speaker, sortable: sortable } %>
+<%= render partial: "field_header", locals: { field: :title, sortable: sortable } %>
+<%= render partial: "field_header", locals: { field: :passage, sortable: sortable } %>
+</div>

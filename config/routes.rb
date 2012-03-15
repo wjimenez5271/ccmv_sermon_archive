@@ -5,11 +5,32 @@ CcmvSermonArchive::Application.routes.draw do
   root to: 'sermons#main'
 
   match '/sermons', to: 'sermons#index', as: 'sermons'
+  match '/sermon/:id', to: 'sermons#show', as: 'sermon'
+
+  # Routes with single filter
   match '/service/:service', to: 'sermons#index', as: 'service'
   match '/speaker/:speaker', to: 'sermons#index', as: 'speaker'
   match '/book/:book', to: 'sermons#book_index', as: 'book'
   match '/passage/:passage', to: 'sermons#passage_index', as: 'passage'
-  match '/sermons/:id', to: 'sermons#show', as: 'sermon'
+
+  # Routes with page
+  match '/sermons/:page', to: 'sermons#index', as: 'sermons_page'
+  match '/service/:service/:page', to: 'sermons#index', as: 'service_page'
+  match '/speaker/:speaker/:page', to: 'sermons#index', as: 'speaker_page'
+  match '/book/:book/:page', to: 'sermons#book_index', as: 'book_page'
+  match '/passage/:passage/:page', to: 'sermons#passage_index', as: 'passage_page'
+
+  # Routes with page and sort
+  match '/sermons/:page/sort/:sort', to: 'sermons#index',
+    as: 'sermons_page_sort'
+  match '/service/:service/:page/sort/:sort', to: 'sermons#index', 
+    as: 'service_page_sort'
+  match '/speaker/:speaker/:page/sort/:sort', to: 'sermons#index',
+    as: 'speaker_page_sort'
+  match '/book/:book/:page/sort/:sort', to: 'sermons#book_index',
+    as: 'book_page_sort'
+  match '/passage/:passage/:page/sort/:sort', to: 'sermons#passage_index',
+    as: 'passage_page_sort'
 
   namespace :admin do
     match '/' => 'sermons#main', as: :root
