@@ -1,15 +1,16 @@
-<% if show_field[field]
+<% if show_field[field.downcase]
     field_str = field.to_s 
+    field_down = field_str.downcase
     sort_direction ||= :asc
     if not defined? sortable
       sortable = true
     end
 %>
-  <div id="<%= field_str %>_sort" class="sermon_<%= field_str %> sermon_list_header">
+  <div id="<%= field_down %>_sort" class="sermon_<%= field_down %> sermon_list_header">
   <% if sortable %>
-    <%= sortable_column(field_str.titleize, direction: sort_direction ) %>
+    <%= sortable_column(field_str, direction: sort_direction ) %>
   <% else %>
-    <%= field_str.titleize %>
+    <%= field_str %>
   <% end %>
   </div>
 <% end %>

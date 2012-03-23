@@ -3,10 +3,11 @@
    end
 %>
 <div class="sermon_row">
-<%= render partial: "field_header", locals: { field: :date, sortable: sortable,
+<%= render partial: "field_header", locals: { field: :MP3, sortable: false } %>
+<%= render partial: "field_header", locals: { field: :Date, sortable: sortable,
                                               sort_direction: :desc } %>
-<%= render partial: "field_header", locals: { field: :service, sortable: sortable } %>
-<%= render partial: "field_header", locals: { field: :speaker, sortable: sortable } %>
-<%= render partial: "field_header", locals: { field: :title, sortable: sortable } %>
-<%= render partial: "field_header", locals: { field: :passage, sortable: sortable } %>
+<%= render partial: "field_header", locals: { field: :Service, sortable: sortable } %>
+<%= render partial: "field_header", locals: { field: :Speaker, sortable: sortable } %>
+<%= render partial: "field_header", locals: { field: :Title, sortable: sortable } %>
+<%= render partial: "field_header", locals: { field: :Passage, sortable: sortable } %>
 </div>

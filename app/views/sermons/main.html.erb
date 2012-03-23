@@ -1,7 +1,11 @@
 <h3>Most Recent</h3>
 <div id="sermons_area">
-  <%= render partial: "sermons_header", locals: { sortable: false } %>
-  <%= render partial: "sermon", collection: @sermons %>
+  <% if @sermons.empty? %>
+    <p>No sermons found!</p>
+  <% else %>
+    <%= render partial: "sermons_header", locals: { sortable: false } %>
+    <%= render partial: "sermon", collection: @sermons %>
+  <% end %>
 </div>
 
 <div id="sermon_archive">

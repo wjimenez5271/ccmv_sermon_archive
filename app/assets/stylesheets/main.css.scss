@@ -40,12 +40,15 @@ h3 {
   .sermon_row {
     @include column($sermon-list-columns, true);
 
-    .sermon_audio { @include column(1); }
+    .sermon_audio, .sermon_mp3 {
+      @include column(1);
+      text-align: center;
+    }
     .sermon_video { @include column(1); }
     .sermon_date { @include column(3); }
     .sermon_service { @include column(2); }
     .sermon_speaker { @include column(3); }
-    .sermon_title { @include column(7); }
+    .sermon_title { @include column(6); }
     .sermon_passage { @include column(5); }
 
     .sermon_field { min-height: 1px; }

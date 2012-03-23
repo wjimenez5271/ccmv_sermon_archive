@@ -1,8 +1,13 @@
 <div id="sermons_area">
+  <h3 id="filter_label"><%= @filter_label %></h3>
 <%= render 'paginate_info' %>
 <div id="sermon_list">
-<%= render "sermons_header" %>
-<%= render partial: 'sermon', collection: @sermons %>
+  <% if @sermons.empty? %>
+    <p>No sermons found!</p>
+  <% else %>
+    <%= render "sermons_header" %>
+    <%= render partial: 'sermon', collection: @sermons %>
+  <% end %>
 </div>
 <%= render 'paginate_info' %>
 </div>

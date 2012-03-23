@@ -23,14 +23,23 @@ class SermonsController < ApplicationController
     conf.default_sort_value = 'passage'
   end
 
-  # TODO Add a function that calculates the defaults for variou things based on the
-  # parameters passed in.
-
   def index
     show_field[:service] = (service == nil) && \
       !domain_search_restrictions.include?(:service)
     show_field[:speaker] = (speaker == nil) && \
       !domain_search_restrictions.include?(:speaker)
+
+    if service and not domain_search_restrictions.include?(:service)
+      @filter_label = service.titleize
+    elsif speaker and not domain_search_restrictions.include?(:speaker)
+      @filter_label = speaker.titleize
+    elsif book
+      @filter_label = book.name.titleize
+    else
+      @filter = ''
+    end
+      
+
     @sermons = Sermon.prefetch_refs.order(sort_order).paginate(page: page)
     @sermons = where_clause(@sermons)
   end
@@ -64,12 +73,13 @@ class SermonsController < ApplicationController
   def main
     show_field.merge!( { service: !domain_search_restrictions.include?(:service), 
                          speaker: !domain_search_restrictions.include?(:speaker) } )
-    @sermons = Sermon.prefetch_refs.order("date DESC")
-    @sermons = where_clause(@sermons)
     if domain_search_restrictions.include? :service
+      @sermons = Sermon.prefetch_refs.order("date DESC")
+      @sermons = where_clause(@sermons)
       @sermons = [ @sermons.first ]
     else
-      @sermons = @sermons.group(:service_id)
+      s = Sermon.group(:service_id).maximum(:date)
+      @sermons = Sermon.prefetch_refs.order('date DESC').find(s.keys())
     end
   end
 
@@ -166,7 +176,7 @@ class SermonsController < ApplicationController
       if not @service
         begin
           # TODO Do this with a simple where statement instead?
-          # Or maybe not since we often need to get the service names anyway
+          # Or maybe not since we often need to get the service names anyway.
           if service_names.include?(params[:service].downcase)
             @service = params[:service]
           else
