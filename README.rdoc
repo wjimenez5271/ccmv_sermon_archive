@@ -1,7 +1,3 @@
-This is the new sermon archive for Calvary Chapel Mountain View and
-Rick Franks's Truth from the Heart ministry. It is currently unfinished and
-under active development.
-
-At some point, there may be a fork of this project designed
-to allow any church to quickly and easily set up their own sermon archive.
-If that happens, this README will point to that project.
+This was a prrof-of-concept for a new sermon archive for Calvary Chapel Mountain View and
+Rick Franks's Truth from the Heart ministry. It is currently unfinished, and will likely remain that
+way indefinitely.
